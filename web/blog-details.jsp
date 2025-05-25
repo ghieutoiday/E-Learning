@@ -275,9 +275,9 @@
                                         <div class="widget">
                                             <h6 class="widget-title">Search</h6>
                                             <div class="search-bx style-1">
-                                                <form role="search" method="post">
+                                                <form role="search" action="postcontroller" method="get">
                                                     <div class="input-group">
-                                                        <input name="text" class="form-control" placeholder="Enter your keywords..." type="text">
+                                                        <input name="titleSearch" class="form-control" placeholder="Enter your keywords..." type="text">
                                                         <span class="input-group-btn">
                                                             <button type="submit" class="fa fa-search text-primary"></button>
                                                         </span> 
@@ -288,9 +288,11 @@
 
                                         <div class = "widge post-category">
                                             <h6 class="widget-title post-category">Post Category</h6>
+                                            
+                                            <!--L?y ra list Post Category, sau khi click vào tên thì chuy?n sang postcontroller-->
                                             <c:forEach items="${requestScope.listPostCategory}" var="a">
-                                                <p><a href="#">${a.postCategoryName}</a></p>
-                                            </c:forEach>    
+                                                <p><a href="postcontroller?postCategoryID=${a.postCategoryID}">${a.postCategoryName}</a></p>
+                                                </c:forEach>    
                                             </h6>
                                         </div>
                                         <hr style="border: none; height: 2px; background-color: gray;">
@@ -298,39 +300,20 @@
                                         <div class="widget recent-posts-entry">
                                             <h6 class="widget-title">Recent Posts</h6>
                                             <div class="widget-post-bx">
-                                                <div class="widget-post clearfix">
-                                                    <div class="ttr-post-media"> <img src="assets/images/blog/recent-blog/pic1.jpg" width="200" height="143" alt=""> </div>
-                                                    <div class="ttr-post-info">
-                                                        <div class="ttr-post-header">
-                                                            <h6 class="post-title"><a href="blog-details.jsp">This Story Behind Education Will Haunt You Forever.</a></h6>
+                                                <c:forEach items="${requestScope.listRecentPost}" var="b">
+                                                    <div class="widget-post clearfix">
+                                                        <div class="ttr-post-media"> <img src="${b.thumbnail}" alt="" style="width: 200px; height: 65px; object-fit: cover; display: block;"> </div>
+                                                        <div class="ttr-post-info">
+                                                            <div class="ttr-post-header">
+                                                                <h6 class="post-title"><a href="postcontroller?postID=${b.postID}"">${b.title}</a></h6>
+                                                            </div>
+                                                            <ul class="media-post">
+                                                                <li><a href="#"><i class="fa fa-calendar"></i>${b.updateDate}</a></li>
+                                                            </ul>
                                                         </div>
-                                                        <ul class="media-post">
-                                                            <li><a href="#"><i class="fa fa-calendar"></i>Oct 23 2019</a></li>
-                                                        </ul>
                                                     </div>
-                                                </div>
-                                                <div class="widget-post clearfix">
-                                                    <div class="ttr-post-media"> <img src="assets/images/blog/recent-blog/pic2.jpg" width="200" height="160" alt=""> </div>
-                                                    <div class="ttr-post-info">
-                                                        <div class="ttr-post-header">
-                                                            <h6 class="post-title"><a href="blog-details.jsp">What Will Education Be Like In The Next 50 Years?</a></h6>
-                                                        </div>
-                                                        <ul class="media-post">
-                                                            <li><a href="#"><i class="fa fa-calendar"></i>May 14 2019</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="widget-post clearfix">
-                                                    <div class="ttr-post-media"> <img src="assets/images/blog/recent-blog/pic3.jpg" width="200" height="160" alt=""> </div>
-                                                    <div class="ttr-post-info">
-                                                        <div class="ttr-post-header">
-                                                            <h6 class="post-title"><a href="blog-details.jsp">Eliminate Your Fears And Doubts About Education.</a></h6>
-                                                        </div>
-                                                        <ul class="media-post">
-                                                            <li><a href="#"><i class="fa fa-calendar"></i>June 12 2019</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                </c:forEach>
+
                                             </div>
                                         </div>
 

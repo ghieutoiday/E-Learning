@@ -48,10 +48,9 @@ public class PostController extends HttpServlet {
             out.println("</html>");
         }
     }
-    
+
     //compiler -- tạo biến static 1 lần
     //runtime -- tạo biến và gán trên bộ nhớ ram
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -61,26 +60,76 @@ public class PostController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    //public abstract void addNewPost();
-    
+    public int searchPostByTitle(String title) {
+        if (title == null || title.isBlank()) {
+            return 0;
+        } else {
+
+            return 1;
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        //Lấy và tạo attribute Post List
+
+        //Lấy postID từ BlogDetail (ở chỗ Recent Post) or BlogList sau khi click vào bài viết
+        String postID_raw = request.getParameter("postID");
+        //Set postID ban đầu bằng -1 để lấy ngoại lệ
+        int postID;
+        if (postID_raw != null && !postID_raw.isBlank()) {
+            try {
+                postID = Integer.parseInt(postID_raw);
+                //Lấy và tạo 1 attribute PostDetail cụ thể để hiện thị trong trang Blog Detail
+                Post postDetail = PostDAO.getInstance().getPostByID(postID);
+                request.setAttribute("postDetail", postDetail);
+
+            } catch (NumberFormatException e) {
+                System.out.println(e);
+            }
+        }
+
+        //Chức năng SEARCH
+        //Lấy title từ thanh search để search
+        String titleSearch = request.getParameter("titleSearch");
+
+        if (titleSearch != null && !titleSearch.isBlank()) {
+            List<Post> listPostByTitle = PostDAO.getInstance().getAllPostByTitle(titleSearch);
+            request.setAttribute("listPostByTitle", listPostByTitle);
+            request.getRequestDispatcher("blog-classic-sidebar.jsp").forward(request, response);
+            return;
+        }
+
+        //Chức năng lọc theo PostCategory
+        String postCategoryID_raw = request.getParameter("postCategoryID");
+        int postCategoryID;
+
+        if (postCategoryID_raw != null && !postCategoryID_raw.isBlank()) {
+            try {
+                postCategoryID = Integer.parseInt(postCategoryID_raw);
+                //Lấy ra List Post có postCategoryID = bằng postCategoryID đưa vô
+                List<Post> listPostByCategory = PostDAO.getInstance().getAllPostByPostCategoryID(postCategoryID);
+                request.setAttribute("listPostByCategory", listPostByCategory);
+                request.getRequestDispatcher("blog-classic-sidebar.jsp").forward(request, response);
+                return;
+
+            } catch (NumberFormatException e) {
+                System.out.println(e);
+            }
+        }
+
+        //Lấy và tạo attribute Post List, này để Thịnh dùng
         List<Post> listPost = PostDAO.getInstance().getAllPost();
         request.setAttribute("listPost", listPost);
 
-        //Lấy và tạo 1 attribute PostDetail cụ thể để hiện thị trong trang Blog Detail
-        Post postDetail = PostDAO.getInstance().getPostByID(1);
-        request.setAttribute("postDetail", postDetail);
-        //Fucntion thuc hien chuc nang them xoa sua
-        //addNewPost();
-        
         //Lấy và tạo ra attribute PostCategory
         List<PostCategory> listPostCategory = PostDAO.getInstance().getAllPostCategory();
         request.setAttribute("listPostCategory", listPostCategory);
-        
+
+        //Lấy 5 bài Post có createDate mới nhất để hiển thị
+        List<Post> listRecentPost = PostDAO.getInstance().getRecentPost();
+        request.setAttribute("listRecentPost", listRecentPost);
+
         request.getRequestDispatcher("blog-details.jsp").forward(request, response);
     }
 
