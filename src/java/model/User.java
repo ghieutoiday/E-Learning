@@ -9,15 +9,6 @@ package model;
  * @author ASUS
  */
 public class User {
-//    userID INT IDENTITY PRIMARY KEY,
-//    fullName NVARCHAR(255) NOT NULL,
-//    email NVARCHAR(255) NOT NULL UNIQUE,
-//    password NVARCHAR(255) NOT NULL,
-//    gender NVARCHAR(50),
-//    mobile NVARCHAR(50),
-//    roleID INT NOT NULL,
-//    avatar NVARCHAR(255),
-//    status BIT NOT NULL,
     private int userID;
     private String fullName, email, password, gender, mobile;
     private Role role;
