@@ -255,7 +255,7 @@ public class PostDAO extends DBContext {
 
     public static void main(String[] args) {
 
-        List<Post> p = getInstance().getAllPostByTitle("lear");
+        List<Post > p = getInstance().getAllPostByTitle("lear");
         for (Post x : p) {
             System.out.println(x.getTitle());
         }
