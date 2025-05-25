@@ -5,6 +5,7 @@
 **/nbproject/private/
 **/nbproject/Makefile-*.mk
 **/nbproject/Package-*.bash
+**/DBContext.java
 build/
 nbbuild/
 dist/
