@@ -15,19 +15,19 @@ public class Post {
     private User owner;
     private String title;
     private PostCategory postCategory;
-    private String thumnail, briefInfo, description, status;
+    private String thumbnail, briefInfo, description, status;
     private boolean feature;
     private Date createDate, updateDate;
 
     public Post() {
     }
 
-    public Post(int postID, User owner, String title, PostCategory postCategory, String thumnail, String briefInfo, String description, String status, boolean feature, Date createDate, Date updateDate) {
+    public Post(int postID, User owner, String title, PostCategory postCategory, String thumbnail, String briefInfo, String description, String status, boolean feature, Date createDate, Date updateDate) {
         this.postID = postID;
         this.owner = owner;
         this.title = title;
         this.postCategory = postCategory;
-        this.thumnail = thumnail;
+        this.thumbnail = thumbnail;
         this.briefInfo = briefInfo;
         this.description = description;
         this.status = status;
@@ -68,12 +68,12 @@ public class Post {
         this.postCategory = postCategory;
     }
 
-    public String getThumnail() {
-        return thumnail;
+    public String getThumbnail() {
+        return thumbnail;
     }
 
-    public void setThumnail(String thumnail) {
-        this.thumnail = thumnail;
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     public String getBriefInfo() {
@@ -123,6 +123,7 @@ public class Post {
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
+
     
     
 }

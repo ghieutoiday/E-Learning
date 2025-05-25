@@ -179,7 +179,7 @@
                                             <li><a href="blog-classic-sidebar.jsp">Blog Classic Sidebar</a></li>
                                             <li><a href="blog-list-sidebar.jsp">Blog List Sidebar</a></li>
                                             <li><a href="blog-standard-sidebar.jsp">Blog Standard Sidebar</a></li>
-                                            <li><a href="blog-details.jsp">Blog Details</a></li>
+                                            <li><a href="postcontroller">Blog Details</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-dashboard"><a href="javascript:;">Dashboard <i class="fa fa-chevron-down"></i></a>
@@ -249,7 +249,7 @@
                                     <!-- blog start -->
                                     <div class="recent-news blog-lg">
                                         <div class="action-box blog-lg">
-                                            <img src="assets/images/blog/default/thum1.jpg" alt="">
+                                            <img src="${c.thumbnail}" alt="blogthumbnail not found !!!">
                                         </div>
                                         <div class="info-bx">
                                             <ul class="media-post">
@@ -265,7 +265,7 @@
 
                                         </div>
                                     </div>
-                                    
+
                                     <!-- blog END -->
                                 </div>
                                 <!-- Left part END -->
@@ -285,18 +285,16 @@
                                                 </form>
                                             </div>
                                         </div>
-                                        
+
                                         <div class = "widge post-category">
                                             <h6 class="widget-title post-category">Post Category</h6>
-                                                <p>Java</p>    
-                                                <p>Database</p>    
-                                                <p>Database</p>    
-                                                <p>Database</p>    
-                                                <p>Database</p>    
-                                                <p><a href="#">Dev Tips</a></p>
-                                                <p><a href="#">Dev Tips</a></p>                                            </h6>
+                                            <c:forEach items="${requestScope.listPostCategory}" var="a">
+                                                <p><a href="#">${a.postCategoryName}</a></p>
+                                            </c:forEach>    
+                                            </h6>
                                         </div>
-                                        
+                                        <hr style="border: none; height: 2px; background-color: gray;">
+
                                         <div class="widget recent-posts-entry">
                                             <h6 class="widget-title">Recent Posts</h6>
                                             <div class="widget-post-bx">
@@ -335,7 +333,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                     </aside>
                                 </div>
                                 <!-- Side bar END -->
@@ -344,9 +342,9 @@
                     </div>
                 </div>
             </div>
-                                            
-                                            
-                                                                                    
+
+
+
             <!-- Content END-->
             <!-- Footer ==== -->
             <footer>
@@ -373,7 +371,7 @@
                     </div>
                     <div class="container">
                         <div class="row">
-                            
+
                             <div class="col-12 col-lg-5 col-md-7 col-sm-12">
                                 <div class="row">
                                     <div class="col-4 col-lg-4 col-md-4 col-sm-4">
@@ -411,7 +409,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>

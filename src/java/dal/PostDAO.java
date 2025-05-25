@@ -47,7 +47,7 @@ public class PostDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
 
             //Kiểm tra xem còn dữ liệu trong rs hay không
-            if (rs.next()) {
+            while (rs.next()) {
                 //Lấy cột thứ 2 trong bảng 
                 String postCategoryName = rs.getString(2);
                 String description = rs.getString(3);
@@ -69,7 +69,7 @@ public class PostDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {  //Kiểm tra xem còn dữ liệu trong rs hay không
+            while (rs.next()) {  //Kiểm tra xem còn dữ liệu trong rs hay không
                 User owner = userDAO.getUserByID(rs.getInt(2));
                 String title = rs.getString(3);
                 PostCategory postCategory = getPostCategortByID(rs.getInt(4));
@@ -99,7 +99,7 @@ public class PostDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {  //Kiểm tra xem còn dữ liệu trong rs hay không
+            while (rs.next()) {  //Kiểm tra xem còn dữ liệu trong rs hay không
                 int id = rs.getInt(1);
                 User owner = userDAO.getUserByID(rs.getInt(2));
                 String title = rs.getString(3);
@@ -122,9 +122,35 @@ public class PostDAO extends DBContext {
         }
         return list;
     }
-    
+
+    public List<PostCategory> getAllPostCategory() {
+        List<PostCategory> list = new ArrayList();
+        try {
+            String sql = "Select * from PostCategory";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {  //Kiểm tra xem còn dữ liệu trong rs hay không
+                int id = rs.getInt(1);
+                String postCategoryName = rs.getString(2);
+                String description = rs.getString(3);
+
+                //Lấy entity
+                PostCategory postCategory = new PostCategory(id, postCategoryName, description);
+                list.add(postCategory);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
-        Post p = getInstance().getPostByID(1);
-        System.out.println(p.getDescription());
+        List<PostCategory> p = getInstance().getAllPostCategory();
+        for (PostCategory x : p) {
+            System.out.println(x.getPostCategoryName());
+        }
     }
 }

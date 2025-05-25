@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Post;
+import model.PostCategory;
 
 /**
  *
@@ -65,14 +66,21 @@ public class PostController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Post> listPost = PostDAO.getInstance().getAllPost();
         
+        //Lấy và tạo attribute Post List
+        List<Post> listPost = PostDAO.getInstance().getAllPost();
+        request.setAttribute("listPost", listPost);
+
+        //Lấy và tạo 1 attribute PostDetail cụ thể để hiện thị trong trang Blog Detail
         Post postDetail = PostDAO.getInstance().getPostByID(1);
         request.setAttribute("postDetail", postDetail);
         //Fucntion thuc hien chuc nang them xoa sua
         //addNewPost();
         
-        request.setAttribute("listPost", listPost);
+        //Lấy và tạo ra attribute PostCategory
+        List<PostCategory> listPostCategory = PostDAO.getInstance().getAllPostCategory();
+        request.setAttribute("listPostCategory", listPostCategory);
+        
         request.getRequestDispatcher("blog-details.jsp").forward(request, response);
     }
 

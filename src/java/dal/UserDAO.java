@@ -30,7 +30,7 @@ public class UserDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             
             //Kiểm tra xem còn dữ liệu trong rs hay không
-            if (rs.next()) { 
+            while (rs.next()) { 
                 //Lấy cột thứ 2 trong bảng Role - tương ứng với cột roleName
                 String roleName = rs.getString(2);
                 
@@ -48,7 +48,7 @@ public class UserDAO extends DBContext {
         User user = null;
         
         try {
-            String sql = "select * from User where userID = " + id;
+            String sql = "select * from [User] where userID = " + id;
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             
@@ -70,5 +70,9 @@ public class UserDAO extends DBContext {
             System.out.println(e);
         }
         return user;
+    }
+    public static void main(String[] args) {
+        UserDAO dao = new UserDAO();
+        System.out.println(dao.getUserByID(1).getFullName());
     }
 }
