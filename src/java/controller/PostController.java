@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.PostDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,6 +12,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Post;
 
 /**
  *
@@ -44,6 +47,9 @@ public class PostController extends HttpServlet {
             out.println("</html>");
         }
     }
+    
+    //compiler -- tạo biến static 1 lần
+    //runtime -- tạo biến và gán trên bộ nhớ ram
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -54,10 +60,20 @@ public class PostController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    //public abstract void addNewPost();
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        List<Post> listPost = PostDAO.getInstance().getAllPost();
+        
+        Post postDetail = PostDAO.getInstance().getPostByID(1);
+        request.setAttribute("postDetail", postDetail);
+        //Fucntion thuc hien chuc nang them xoa sua
+        //addNewPost();
+        
+        request.setAttribute("listPost", listPost);
+        request.getRequestDispatcher("blog-details.jsp").forward(request, response);
     }
 
     /**

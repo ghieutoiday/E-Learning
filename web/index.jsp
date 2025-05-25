@@ -189,7 +189,7 @@
                                             <li><a href="blog-classic-sidebar.jsp">Blog Classic Sidebar</a></li>
                                             <li><a href="blog-list-sidebar.jsp">Blog List Sidebar</a></li>
                                             <li><a href="blog-standard-sidebar.jsp">Blog Standard Sidebar</a></li>
-                                            <li><a href="blog-details.jsp">Blog Details</a></li>
+                                            <li><a href="postcontroller">Blog Details</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-dashboard"><a href="javascript:;">Dashboard <i class="fa fa-chevron-down"></i></a>

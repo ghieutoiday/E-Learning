@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -242,6 +243,7 @@
                     <div class="section-area section-sp1">
                         <div class="container">
                             <div class="row">
+                                <c:set var="c" value="${requestScope.postDetail}"/>
                                 <!-- Left part start -->
                                 <div class="col-lg-8 col-xl-8">
                                     <!-- blog start -->
@@ -251,15 +253,14 @@
                                         </div>
                                         <div class="info-bx">
                                             <ul class="media-post">
-                                                <li><a href="#"><i class="fa fa-user-md"></i>Ho Hoang Quoc</a></li>
-                                                <li><a href="#"><i class="fa fa-calendar"></i>May 14 2019</a></li>
-                                                <li><a href="#"><i class="fa fa-tags"></i>Code Tips</a></li>
+                                                <li><a href="#"><i class="fa fa-user-md"></i>${c.owner.fullName}</a></li>
+                                                &nbsp;&nbsp;&nbsp;
+                                                <li><a href="#"><i class="fa fa-calendar"></i>${c.createDate}</a></li>
+                                                &nbsp;&nbsp;&nbsp;
+                                                <li><a href="#"><i class="fa fa-tags"></i>${c.postCategory.postCategoryName}</a></li>
                                             </ul>
-                                            <h5 class="post-title"><a href="#">Why every startup should adopt Amazon?s Hot Air. Why every startup should adopt Amazon?s Hot Air.</a></h5>
-                                            <p>It is used every day in all types of businesses; Email newsletters, websites, print and online advertisements, presentations, social media updates, flyers, and brochures; the list goes on and on</p>
-                                            <p>David Ogilvy, the advertising legend once said that, On average, five times as many people read the headline as read the body copy. When you have written your headline, you have spent eighty cents out of your dollar." As Ogilvy points out, your headline is the first (and sometimes the only) thing that your audience will read.</p>
-                                            <p>You just need to enter the keyword and select the keyword type to generate a list of 6 title ideas and suggestions. If you?re not satisfied with the results, you can always hit the refresh button to generate a new list of unique titles.</p>
-                                            <p>Once you?ve gotten all the titles and have chosen the best one, the next thing you need to do is to craft a magnetic content. Great content marketers excel at creating content that their readers crave, but even the best struggle with delivering content to the right person at the right time.</p>
+                                            <h5 class="post-title"><a href="#">${c.title}</a></h5>
+                                            <p>${c.description}</p>
                                             <div class="ttr-divider bg-gray"><i class="icon-dot c-square"></i></div>
 
                                         </div>
@@ -343,6 +344,9 @@
                     </div>
                 </div>
             </div>
+                                            
+                                            
+                                                                                    
             <!-- Content END-->
             <!-- Footer ==== -->
             <footer>
