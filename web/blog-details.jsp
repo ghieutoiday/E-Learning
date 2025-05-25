@@ -266,7 +266,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- blog END -->
+                                <!-- blog END -->
                                 </div>
                                 <!-- Left part END -->
                                 <!-- Side bar start -->

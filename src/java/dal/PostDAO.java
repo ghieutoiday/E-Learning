@@ -148,9 +148,6 @@ public class PostDAO extends DBContext {
     }
 
     public static void main(String[] args) {
-        List<PostCategory> p = getInstance().getAllPostCategory();
-        for (PostCategory x : p) {
-            System.out.println(x.getPostCategoryName());
-        }
+        
     }
 }
