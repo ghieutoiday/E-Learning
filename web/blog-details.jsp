@@ -177,9 +177,9 @@
                                         <ul class="sub-menu">
                                             <li><a href="blog-classic-grid.jsp">Blog Classic</a></li>
                                             <li><a href="blog-classic-sidebar.jsp">Blog Classic Sidebar</a></li>
-                                            <li><a href="blog-list-sidebar.jsp">Blog List Sidebar</a></li>
+                                            <li><a href="postcontroller?pageforward=bloglist">Blog List Sidebar</a></li>
                                             <li><a href="blog-standard-sidebar.jsp">Blog Standard Sidebar</a></li>
-                                            <li><a href="postcontroller">Blog Details</a></li>
+                                            <li><a href="postcontroller?pageforward=blogdetail">Blog Details</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-dashboard"><a href="javascript:;">Dashboard <i class="fa fa-chevron-down"></i></a>
@@ -276,6 +276,7 @@
                                             <h6 class="widget-title">Search</h6>
                                             <div class="search-bx style-1">
                                                 <form role="search" action="postcontroller" method="get">
+                                                    <input type="hidden" name="pageforward" value="bloglist" />
                                                     <div class="input-group">
                                                         <input name="titleSearch" class="form-control" placeholder="Enter your keywords..." type="text">
                                                         <span class="input-group-btn">
@@ -283,15 +284,16 @@
                                                         </span> 
                                                     </div>
                                                 </form>
+
                                             </div>
                                         </div>
 
                                         <div class = "widge post-category">
                                             <h6 class="widget-title post-category">Post Category</h6>
-                                            
+
                                             <!--L?y ra list Post Category, sau khi click vào tên thì chuy?n sang postcontroller-->
                                             <c:forEach items="${requestScope.listPostCategory}" var="a">
-                                                <p><a href="postcontroller?postCategoryID=${a.postCategoryID}">${a.postCategoryName}</a></p>
+                                                <p><a href="postcontroller?postCategoryID=${a.postCategoryID}&pageforward=bloglist">${a.postCategoryName}</a></p>
                                                 </c:forEach>    
                                             </h6>
                                         </div>
@@ -305,7 +307,7 @@
                                                         <div class="ttr-post-media"> <img src="${b.thumbnail}" alt="" style="width: 200px; height: 65px; object-fit: cover; display: block;"> </div>
                                                         <div class="ttr-post-info">
                                                             <div class="ttr-post-header">
-                                                                <h6 class="post-title"><a href="postcontroller?postID=${b.postID}"">${b.title}</a></h6>
+                                                                <h6 class="post-title"><a href="postcontroller?postID=${b.postID}&pageforward=blogdetail">${b.title}</a></h6>
                                                             </div>
                                                             <ul class="media-post">
                                                                 <li><a href="#"><i class="fa fa-calendar"></i>${b.updateDate}</a></li>
