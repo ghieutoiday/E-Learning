@@ -51,8 +51,6 @@ public class PostController extends HttpServlet {
         }
     }
 
-    //compiler -- tạo biến static 1 lần
-    //runtime -- tạo biến và gán trên bộ nhớ ram
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -62,15 +60,6 @@ public class PostController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    public int searchPostByTitle(String title) {
-        if (title == null || title.isBlank()) {
-            return 0;
-        } else {
-
-            return 1;
-        }
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -85,8 +74,8 @@ public class PostController extends HttpServlet {
                 //Lấy và tạo 1 attribute PostDetail cụ thể để hiện thị trong trang Blog Detail
                 Post postDetail = PostDAO.getInstance().getPostByID(postID);
                 request.setAttribute("postDetail", postDetail);
-                request.getRequestDispatcher("blog-details.jsp").forward(request, response);
-                return;
+//                request.getRequestDispatcher("blog-details.jsp").forward(request, response);
+//                return;
 
             } catch (NumberFormatException e) {
                 System.out.println(e);
@@ -112,18 +101,21 @@ public class PostController extends HttpServlet {
         String titleSearch = request.getParameter("titleSearch");
         if (titleSearch != null && !titleSearch.isBlank()) {
             List<Post> listPostByTitle = PostDAO.getInstance().getAllPostByTitle(titleSearch, page, BLOGS_PER_PAGE);
+            //listPost này để truyền qua blog list để hiển thị
+            //cả 3 trường hợp if đều dùng chung 1 cái attribute tên là listPost
             request.setAttribute("listPost", listPostByTitle);
-//            request.getRequestDispatcher("blog-list-sidebar.jsp").forward(request, response);
-//            return;
+
+            //Lấy tổng số bài post có title match với titleSearch 
+            //để phục vụ cho việc phân trang
             totalBlogs = PostDAO.getInstance().getTotalPostAfterSearch(titleSearch);
         } else if (postCategoryID_raw != null && !postCategoryID_raw.isBlank()) {
             try {
                 postCategoryID = Integer.parseInt(postCategoryID_raw);
                 //Lấy ra List Post có postCategoryID = bằng postCategoryID đưa vô
                 List<Post> listPostByCategory = PostDAO.getInstance().getAllPostByPostCategoryID(postCategoryID, page, BLOGS_PER_PAGE);
-                request.setAttribute("listPostByCategory", listPostByCategory);
-//                request.getRequestDispatcher("blog-list-sidebar.jsp").forward(request, response);
-//                return;
+                request.setAttribute("listPost", listPostByCategory);
+                //cần sửa
+                totalBlogs = PostDAO.getInstance().getTotalPostAfterFilterPostCategory(postCategoryID);
 
             } catch (NumberFormatException e) {
                 System.out.println(e);
@@ -153,10 +145,8 @@ public class PostController extends HttpServlet {
         String pageforward = request.getParameter("pageforward");
         if (pageforward.equalsIgnoreCase("bloglist")) {
             request.getRequestDispatcher("blog-list-sidebar.jsp").forward(request, response);
-            return;
         } else if (pageforward.equalsIgnoreCase("blogdetail")) {
             request.getRequestDispatcher("blog-details.jsp").forward(request, response);
-            return;
         }
 
     }

@@ -180,9 +180,9 @@
                                         <ul class="sub-menu">
                                             <li><a href="blog-classic-grid.jsp">Blog Classic</a></li>
                                             <li><a href="blog-classic-sidebar.jsp">Blog Classic Sidebar</a></li>
-                                            <li><a href="blog-list-sidebar.jsp">Blog List Sidebar</a></li>
+                                            <li><a href="postcontroller?pageforward=bloglist">Blog List Sidebar</a></li>
                                             <li><a href="blog-standard-sidebar.jsp">Blog Standard Sidebar</a></li>
-                                            <li><a href="blog-details.jsp">Blog Details</a></li>
+                                            <li><a href="postcontroller?pageforward=blogdetail">Blog Details</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-dashboard"><a href="javascript:;">Dashboard <i class="fa fa-chevron-down"></i></a>
@@ -261,7 +261,7 @@
                                                     <li><a href="#"><i class="fa fa-user"></i>${o.owner.fullName}</a></li>
 
                                                 </ul>
-                                                <h5 class="post-title"><a href="postcontroller?postID=${o.postID}">${o.title}</a></h5>
+                                                <h5 class="post-title"><a href="postcontroller?postID=${o.postID}&pageforward=blogdetail">${o.title}</a></h5>
                                                 <div class="post-category">
                                                     <a href="#"><i class="fa fa-folder-open"></i> ${o.postCategory.postCategoryName}</a>
                                                 </div>
@@ -361,7 +361,7 @@
                                                         <div class="ttr-post-media"> <img src="${b.thumbnail}" alt="" style="width: 200px; height: 65px; object-fit: cover; display: block;"> </div>
                                                         <div class="ttr-post-info">
                                                             <div class="ttr-post-header">
-                                                                <h6 class="post-title"><a href="postcontroller?postID=${b.postID}"">${b.title}</a></h6>
+                                                                <h6 class="post-title"><a href="postcontroller?postID=${b.postID}&pageforward=blogdetail">${b.title}</a></h6>
                                                             </div>
                                                             <ul class="media-post">
                                                                 <li><a href="#"><i class="fa fa-calendar"></i>${b.updateDate}</a></li>
