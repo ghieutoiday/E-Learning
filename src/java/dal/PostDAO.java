@@ -129,7 +129,7 @@ public class PostDAO extends DBContext {
         PostCategory postCategory = null;
 
         try {
-            String sql = "select * from PostCategory where status = 'Active' AND postCategoryID = " + id;
+            String sql = "select * from PostCategory where postCategoryID = " + id;
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
