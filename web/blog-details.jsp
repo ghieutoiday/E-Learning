@@ -276,6 +276,7 @@
                                             <h6 class="widget-title">Search</h6>
                                             <div class="search-bx style-1">
                                                 <form role="search" action="postcontroller" method="get">
+                                                    <input type="hidden" name="pageforward" value="bloglist" />
                                                     <div class="input-group">
                                                         <input name="titleSearch" class="form-control" placeholder="Enter your keywords..." type="text">
                                                         <span class="input-group-btn">
@@ -283,15 +284,16 @@
                                                         </span> 
                                                     </div>
                                                 </form>
+
                                             </div>
                                         </div>
 
                                         <div class = "widge post-category">
                                             <h6 class="widget-title post-category">Post Category</h6>
-                                            
+
                                             <!--L?y ra list Post Category, sau khi click vào tên thì chuy?n sang postcontroller-->
                                             <c:forEach items="${requestScope.listPostCategory}" var="a">
-                                                <p><a href="postcontroller?postCategoryID=${a.postCategoryID}">${a.postCategoryName}</a></p>
+                                                <p><a href="postcontroller?postCategoryID=${a.postCategoryID}&pageforward=bloglist">${a.postCategoryName}</a></p>
                                                 </c:forEach>    
                                             </h6>
                                         </div>

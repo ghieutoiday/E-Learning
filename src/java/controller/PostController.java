@@ -32,6 +32,8 @@ public class PostController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private static final int BLOGS_PER_PAGE = 5; // Số blog mỗi trang
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -83,34 +85,7 @@ public class PostController extends HttpServlet {
                 //Lấy và tạo 1 attribute PostDetail cụ thể để hiện thị trong trang Blog Detail
                 Post postDetail = PostDAO.getInstance().getPostByID(postID);
                 request.setAttribute("postDetail", postDetail);
-
-            } catch (NumberFormatException e) {
-                System.out.println(e);
-            }
-        }
-
-        //Chức năng SEARCH
-        //Lấy title từ thanh search để search
-        String titleSearch = request.getParameter("titleSearch");
-
-        if (titleSearch != null && !titleSearch.isBlank()) {
-            List<Post> listPostByTitle = PostDAO.getInstance().getAllPostByTitle(titleSearch);
-            request.setAttribute("listPostByTitle", listPostByTitle);
-            request.getRequestDispatcher("blog-classic-sidebar.jsp").forward(request, response);
-            return;
-        }
-
-        //Chức năng lọc theo PostCategory
-        String postCategoryID_raw = request.getParameter("postCategoryID");
-        int postCategoryID;
-
-        if (postCategoryID_raw != null && !postCategoryID_raw.isBlank()) {
-            try {
-                postCategoryID = Integer.parseInt(postCategoryID_raw);
-                //Lấy ra List Post có postCategoryID = bằng postCategoryID đưa vô
-                List<Post> listPostByCategory = PostDAO.getInstance().getAllPostByPostCategoryID(postCategoryID);
-                request.setAttribute("listPostByCategory", listPostByCategory);
-                request.getRequestDispatcher("blog-classic-sidebar.jsp").forward(request, response);
+                request.getRequestDispatcher("blog-details.jsp").forward(request, response);
                 return;
 
             } catch (NumberFormatException e) {
@@ -118,9 +93,53 @@ public class PostController extends HttpServlet {
             }
         }
 
+        //Chức năng lọc theo PostCategory
+        String postCategoryID_raw = request.getParameter("postCategoryID");
+        int postCategoryID;
+
         //Lấy và tạo attribute Post List, này để Thịnh dùng
-        List<Post> listPost = PostDAO.getInstance().getAllPost();
-        request.setAttribute("listPost", listPost);
+        // Get filter parameters
+        String pageStr = request.getParameter("page");
+        int page = 1;
+        if (pageStr != null && !pageStr.isEmpty()) {
+            page = Integer.parseInt(pageStr);
+        }
+
+        int totalBlogs = -1;
+
+        //Chức năng SEARCH
+        //Lấy title từ thanh search để search
+        String titleSearch = request.getParameter("titleSearch");
+        if (titleSearch != null && !titleSearch.isBlank()) {
+            List<Post> listPostByTitle = PostDAO.getInstance().getAllPostByTitle(titleSearch, page, BLOGS_PER_PAGE);
+            request.setAttribute("listPost", listPostByTitle);
+//            request.getRequestDispatcher("blog-list-sidebar.jsp").forward(request, response);
+//            return;
+            totalBlogs = PostDAO.getInstance().getTotalPostAfterSearch(titleSearch);
+        } else if (postCategoryID_raw != null && !postCategoryID_raw.isBlank()) {
+            try {
+                postCategoryID = Integer.parseInt(postCategoryID_raw);
+                //Lấy ra List Post có postCategoryID = bằng postCategoryID đưa vô
+                List<Post> listPostByCategory = PostDAO.getInstance().getAllPostByPostCategoryID(postCategoryID, page, BLOGS_PER_PAGE);
+                request.setAttribute("listPostByCategory", listPostByCategory);
+//                request.getRequestDispatcher("blog-list-sidebar.jsp").forward(request, response);
+//                return;
+
+            } catch (NumberFormatException e) {
+                System.out.println(e);
+            }
+        } else {
+            List<Post> listPost = PostDAO.getInstance().getAllPost(page, BLOGS_PER_PAGE);
+            request.setAttribute("listPost", listPost);
+            totalBlogs = PostDAO.getInstance().getTotalPost();
+        }
+
+        int totalPages = (int) Math.ceil((double) totalBlogs / BLOGS_PER_PAGE);
+
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("totalBlogs", totalBlogs);
+        request.setAttribute("BLOGS_PER_PAGE", BLOGS_PER_PAGE);
 
         //Lấy và tạo ra attribute PostCategory
         List<PostCategory> listPostCategory = PostDAO.getInstance().getAllPostCategory();
@@ -130,7 +149,16 @@ public class PostController extends HttpServlet {
         List<Post> listRecentPost = PostDAO.getInstance().getRecentPost();
         request.setAttribute("listRecentPost", listRecentPost);
 
-        request.getRequestDispatcher("blog-details.jsp").forward(request, response);
+        //Lấy page để Chọn trang nào đc forward sang
+        String pageforward = request.getParameter("pageforward");
+        if (pageforward.equalsIgnoreCase("bloglist")) {
+            request.getRequestDispatcher("blog-list-sidebar.jsp").forward(request, response);
+            return;
+        } else if (pageforward.equalsIgnoreCase("blogdetail")) {
+            request.getRequestDispatcher("blog-details.jsp").forward(request, response);
+            return;
+        }
+
     }
 
     /**
