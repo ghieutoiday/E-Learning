@@ -32,32 +32,36 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDAO userDao = new UserDAO();
-        String mess = "";
-        String email = request.getParameter("email");
-        User user = userDao.getUserByEmail(email);
-        String password = request.getParameter("password");
-        String newPassword = request.getParameter("newPassword");
-        String confirmPassword = request.getParameter("confirmPassword");
-        if (user == null) {
-            mess = "Email not exist!";
-            request.setAttribute("mess", mess);
-        } else {
-            if (!password.equals(user.getPassword())) {
-                mess = "Password is fail!";
+        String action = request.getParameter("action");
+        if( action.equals("changePassword")){
+            UserDAO userDao = new UserDAO();
+            String mess = "";
+            String email = request.getParameter("email");
+            User user = userDao.getUserByEmail(email);
+            String password = request.getParameter("password");
+            String newPassword = request.getParameter("newPassword");
+            String confirmPassword = request.getParameter("confirmPassword");
+            if (user == null) {
+                mess = "Email not exist!";
                 request.setAttribute("mess", mess);
-            } else if (newPassword.equals(user.getPassword()) || newPassword.equals(password)) {
-                mess = "New password is same old password!";
-                request.setAttribute("mess", mess);
-            } else if ( !newPassword.equals(confirmPassword)) {
-                mess = "New password is different Confirm password!";
-                request.setAttribute("mess", mess);
-            } else{
-                userDao.UpdatePassword(newPassword, email);
-                mess = "Change Password Succes";
-                request.setAttribute("mess", mess);
+            } else {
+                if (!password.equals(user.getPassword())) {
+                    mess = "Password is fail!";
+                    request.setAttribute("mess", mess);
+                } else if (newPassword.equals(user.getPassword()) || newPassword.equals(password)) {
+                    mess = "New password is same old password!";
+                    request.setAttribute("mess", mess);
+                } else if (!newPassword.equals(confirmPassword)) {
+                    mess = "New password is different Confirm password!";
+                    request.setAttribute("mess", mess);
+                } else {
+                    userDao.UpdatePassword(newPassword, email);
+                    mess = "Change Password Succes";
+                    request.setAttribute("mess", mess);
+                }
             }
         }
+        
 
         request.getRequestDispatcher("change-password.jsp").forward(request, response);
 

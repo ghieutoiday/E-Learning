@@ -35,6 +35,10 @@ public class CourseCategory {
     public void setCourseCategoryName(String courseCategoryName) {
         this.courseCategoryName = courseCategoryName;
     }
-    
+
+    @Override
+    public String toString() {
+        return courseCategoryName;
+    }
     
 }

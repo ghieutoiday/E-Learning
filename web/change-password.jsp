@@ -186,6 +186,7 @@
         <div class="change-password">
             <h2>Change Password</h2>
             <form method="post" action="usercontroller">
+                <input type="hidden" name="action" value="changePassword">
                 <input type="email" name="email" value="" placeholder="Email" required><br>
                 <input type="password" name="password" value="" placeholder="Old Password" required><br>
                 <input type="password" name="newPassword" value="" placeholder="New Password" required><br>

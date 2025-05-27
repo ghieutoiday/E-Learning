@@ -24,7 +24,7 @@ public class UserDAO extends DBContext{
     //Hàm getUser By ID
     public User getUser(int id){
         User user = null;
-        String sql = "SELECT TOP (1000) [userID]\n"
+        String sql = "SELECT[userID]\n"
                 + "      ,[fullName]\n"
                 + "      ,[email]\n"
                 + "      ,[password]\n"
@@ -43,7 +43,7 @@ public class UserDAO extends DBContext{
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {    
-                Role roleID = roleDao.getRole(rs.getInt(id));
+                Role roleID = roleDao.getRole(rs.getInt("roleID"));
                 user = new User(rs.getInt("userID"), rs.getString("fullName"), rs.getString("email"), rs.getString("password"),
                         rs.getString("gender"), rs.getString("mobile"), roleID, rs.getString("avatar"), rs.getString("status"));
                 
@@ -112,7 +112,7 @@ public class UserDAO extends DBContext{
     public static void main(String[] args) {
         UserDAO u = new UserDAO();
         String email = "nguyenvanan@gmail.com";
-        System.out.println(u.UpdatePassword("1234", email));
+        System.out.println(u.getUser(10));
     }
     
     
