@@ -59,12 +59,13 @@ public class UserDAO extends DBContext {
                 String password = rs.getString(4);
                 String gender = rs.getString(5);
                 String mobile = rs.getString(6);
-                Role role = getRoleByID(rs.getInt(7));
-                String avatar = rs.getString(8);
-                String status = rs.getString(9);
+                String address = rs.getString(7);
+                Role role = getRoleByID(rs.getInt(8));
+                String avatar = rs.getString(9);
+                String status = rs.getString(10);
                 
                 //Lấy ra đối tượng User
-                user = new User(id, fullName, email, password, gender, mobile, role, avatar, status);
+                user = new User(id, fullName, email, password, gender, mobile, address, role, avatar, status);
             }
         } catch (SQLException e) {
             System.out.println(e);

@@ -10,20 +10,21 @@ package model;
  */
 public class User {
     private int userID;
-    private String fullName, email, password, gender, mobile;
+    private String fullName, email, password, gender, mobile, address;
     private Role role;
     private String avatar, status;
 
     public User() {
     }
 
-    public User(int userID, String fullName, String email, String password, String gender, String mobile, Role role, String avatar, String status) {
+    public User(int userID, String fullName, String email, String password, String gender, String mobile, String address, Role role, String avatar, String status) {
         this.userID = userID;
         this.fullName = fullName;
         this.email = email;
         this.password = password;
         this.gender = gender;
         this.mobile = mobile;
+        this.address = address;
         this.role = role;
         this.avatar = avatar;
         this.status = status;
@@ -75,6 +76,14 @@ public class User {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Role getRole() {
