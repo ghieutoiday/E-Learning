@@ -6,54 +6,54 @@
 <%@page import="model.Post"%>
 <html lang="en">
     <head>
-   <!-- META ============================================= -->
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="keywords" content="" />
-	<meta name="author" content="" />
-	<meta name="robots" content="" />
-	
-	<!-- DESCRIPTION -->
-	<meta name="description" content="EduChamp : Education HTML Template" />
-	
-	<!-- OG -->
-	<meta property="og:title" content="EduChamp : Education HTML Template" />
-	<meta property="og:description" content="EduChamp : Education HTML Template" />
-	<meta property="og:image" content="" />
-	<meta name="format-detection" content="telephone=no">
-	
-	<!-- FAVICONS ICON ============================================= -->
-	<link rel="icon" href="../error-404.jsp" type="image/x-icon" />
-	<link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath()%>/admin/assets/images/favicon.png" />
-	
-	<!-- PAGE TITLE HERE ============================================= -->
-	<title>EduChamp : Education HTML Template </title>
-	
-	<!-- MOBILE SPECIFIC ============================================= -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<!--[if lt IE 9]>
-	<script src="assets/js/html5shiv.min.js"></script>
-	<script src="assets/js/respond.min.js"></script>
-	<![endif]-->
-	
-	<!-- All PLUGINS CSS ============================================= -->
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/css/assets.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/vendors/calendar/fullcalendar.css">
-	
-	<!-- TYPOGRAPHY ============================================= -->
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/css/typography.css">
-	
-	<!-- SHORTCODES ============================================= -->
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/css/shortcodes/shortcodes.css">
-	
-	<!-- STYLESHEETS ============================================= -->
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/css/style.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/css/dashboard.css">
-	<link class="skin" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/css/color/color-1.css">
-	
+        <!-- META ============================================= -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
+        <meta name="robots" content="" />
 
-                <style>
+        <!-- DESCRIPTION -->
+        <meta name="description" content="EduChamp : Education HTML Template" />
+
+        <!-- OG -->
+        <meta property="og:title" content="EduChamp : Education HTML Template" />
+        <meta property="og:description" content="EduChamp : Education HTML Template" />
+        <meta property="og:image" content="" />
+        <meta name="format-detection" content="telephone=no">
+
+        <!-- FAVICONS ICON ============================================= -->
+        <link rel="icon" href="../error-404.jsp" type="image/x-icon" />
+        <link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath()%>/admin/assets/images/favicon.png" />
+
+        <!-- PAGE TITLE HERE ============================================= -->
+        <title>EduChamp : Education HTML Template </title>
+
+        <!-- MOBILE SPECIFIC ============================================= -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!--[if lt IE 9]>
+        <script src="assets/js/html5shiv.min.js"></script>
+        <script src="assets/js/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- All PLUGINS CSS ============================================= -->
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/css/assets.css">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/vendors/calendar/fullcalendar.css">
+
+        <!-- TYPOGRAPHY ============================================= -->
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/css/typography.css">
+
+        <!-- SHORTCODES ============================================= -->
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/css/shortcodes/shortcodes.css">
+
+        <!-- STYLESHEETS ============================================= -->
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/css/style.css">
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/css/dashboard.css">
+        <link class="skin" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/css/color/color-1.css">
+
+
+        <style>
             /* CSS */
             body {
                 font-family: Arial, sans-serif;
@@ -312,16 +312,7 @@
                         <li>
                             <a href="<%=request.getContextPath()%>/index.jsp" class="ttr-material-button ttr-submenu-toggle">HOME</a>
                         </li>
-                        <li>
-                            <a href="#" class="ttr-material-button ttr-submenu-toggle">QUICK MENU <i class="fa fa-angle-down"></i></a>
-                            <div class="ttr-header-submenu">
-                                <ul>
-                                    <li><a href="<%=request.getContextPath()%>/courses.jsp">Our Posts List</a></li>
-                                    <li><a href="<%=request.getContextPath()%>/event.jsp">New Event</a></li>
-                                    <li><a href="<%=request.getContextPath()%>/membership.jsp">Membership</a></li>
-                                </ul>
-                            </div>
-                        </li>
+
                     </ul>
                     <!-- header left menu end -->
                 </div>
@@ -463,269 +454,271 @@
             </div>
         </header> 
         <!-- Left sidebar menu start -->
-        
+
 
         <!-- Main container -->
         <!<!--<main class="ttr-wrapper">-->
-            <div class="container-fluid">
-                <div class="db-breadcrumb">
-                    <h4 class="breadcrumb-title">Posts List</h4>
-                    <ul class="db-breadcrumb-list">
-                        <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
-                        <li>Posts List</li>
-                    </ul>
-                </div>	
-                <div class="row">
-                    <!-- Your Profile Views Chart -->
-                    <div class="col-lg-12 m-b30">
-                        <div class="widget-box">
-                            <div class="wc-title">
-                                <div class="top-bar">
-                                    <form action="PostController" method="GET" class="d-flex">
-                                        <input type="text" name="search" value="${param.search}" placeholder="Search by title..." class="search-input" />
-                                        <input type="hidden" name="page" value="1" />
-                                        <button type="submit" class="btn btn-warning search">Search</button>
-                                    </form>
-                                    <a href="PostController?action=showAddPost" class="btn btn-warning add-post-btn">Add Post</a>
-                                </div>
+        <div class="container-fluid">
 
-                                <!-- Bộ lọc -->
-                                <div class="filters">
-                                    <form action="PostController" method="GET" class="d-flex align-items-center text-black" style="color: black;">
-                                        <select name="sortBy" class="sort-select">
-                                            <option value="" disabled selected hidden>Sort by</option>
-                                            <option style="color: black;" value="title" ${param.sortBy eq 'title' ? 'selected' : ''}>Title</option>
-                                            <option value="category" ${param.sortBy eq 'category' ? 'selected' : ''}>Category</option>
-                                            <option value="author" ${param.sortBy eq 'author' ? 'selected' : ''}>Author</option>
-                                            <option value="date" ${param.sortBy eq 'date' ? 'selected' : ''}>Date</option>
-                                            <option value="status" ${param.sortBy eq 'status' ? 'selected' : ''}>Status</option>
-                                            <option value="feature" ${param.sortBy eq 'feature' ? 'selected' : ''}>Feature</option>
-                                        </select>
-                                        
-                                        <select name="category" class="sort-select">
-                                            <option value="" disabled selected hidden>Category</option>
-                                            <c:forEach var="category" items="${requestScope.categories}">
-                                                <option value="${category.postCategoryID}" ${param.category eq category.postCategoryID ? 'selected' : ''}>
-                                                    ${category.postCategoryName}
-                                                </option>
-                                            </c:forEach>
-                                        </select>
-                                        
-                                        <select name="author" class="sort-select">
-                                            <option value="" disabled selected hidden>Author</option>
-                                            <c:forEach var="author" items="${requestScope.authors}">
-                                                <option value="${author.userID}" ${param.author eq author.userID ? 'selected' : ''}>
-                                                    ${author.fullName}
-                                                </option>
-                                            </c:forEach>
-                                        </select>
-                                        
-                                        <select name="status" class="sort-select">
-                                            <option value="" disabled selected hidden>Status</option>
-                                            <option value="active" ${param.status eq 'active' ? 'selected' : ''}>Active</option>
-                                            <option value="inactive" ${param.status eq 'inactive' ? 'selected' : ''}>Inactive</option>
-                                        </select>
-                                        
-                                        <select name="feature" class="sort-select">
-                                            <option value="" disabled selected hidden>Feature</option>
-                                            <option value="true" ${param.feature eq 'true' ? 'selected' : ''}>Yes</option>
-                                            <option value="false" ${param.feature eq 'false' ? 'selected' : ''}>No</option>
-                                        </select>
-                                        
-                                        <input type="hidden" name="page" value="1" />
-                                        <input type="hidden" name="search" value="${param.search}" />
-                                        <button type="submit" class="btn btn-warning">Apply Filters</button>
-                                        <a href="PostController" class="btn btn-warning reset">Reset Filters</a>
-                                    </form>
-                                </div>
+            <div class="row">
+                <!-- Your Profile Views Chart -->
+                <div class="col-lg-12 m-b30">
+                    <div class="widget-box">
+                        <div class="wc-title">
+                            <div class="db-breadcrumb">
+                                <h4 class="breadcrumb-title">Posts List</h4>
+                                <ul class="db-breadcrumb-list">
+                                    <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                                    <li>Posts List</li>
+                                </ul>
+                            </div>
+                            <div class="top-bar">
+
+                                <form action="PostController" method="GET" class="d-flex">
+                                    <input type="text" name="search" value="${param.search}" placeholder="Search by title..." class="search-input" />
+                                    <input type="hidden" name="page" value="1" />
+                                    <button type="submit" class="btn btn-warning search">Search</button>
+                                </form>
+                                <a href="PostController?action=showAddPost" class="btn btn-warning add-post-btn">Add Post</a>
                             </div>
 
-                            <div class="widget-inner">
-                                <div class="card-courses-list admin-courses">
+                            <!-- Bộ lọc -->
+                            <div class="filters">
+                                <form action="PostController" method="GET" class="d-flex align-items-center text-black" style="color: black;">
+                                    <select name="sortBy" class="sort-select">
+                                        <option value="" disabled selected hidden>Sort by</option>
+                                        <option style="color: black;" value="title" ${param.sortBy eq 'title' ? 'selected' : ''}>Title</option>
+                                        <option value="category" ${param.sortBy eq 'category' ? 'selected' : ''}>Category</option>
+                                        <option value="author" ${param.sortBy eq 'author' ? 'selected' : ''}>Author</option>
+                                        <option value="date" ${param.sortBy eq 'date' ? 'selected' : ''}>Date</option>
+                                        <option value="status" ${param.sortBy eq 'status' ? 'selected' : ''}>Status</option>
+                                        <option value="feature" ${param.sortBy eq 'feature' ? 'selected' : ''}>Feature</option>
+                                    </select>
 
-                                    <table border="1">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Thumbnail</th>
-                                                <th>Title</th>
-                                                <th>Category</th>
-                                                <th>Owner</th>
-                                                <th>Create Date</th>
-                                                <th>Status</th>
-                                                <th>Feature</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach var="post" items="${requestScope.posts}" varStatus="loop">
-                                                <tr> 
-                                                    <td>${post.postID}</td>
-                                                    <td><img src="${post.thumbnail}" alt="Thumbnail" style="width: 50px; height: 50px; object-fit: cover;"></td>
-                                                    <td>${post.title}</td>
-                                                    <td>${post.postCategory.postCategoryName}</td>
-                                                    <td>${post.owner.fullName}</td>
-                                                    <td><fmt:formatDate value="${post.createDate}" pattern="dd/MM/yyyy"/></td>
-                                                    <td>
-                                                        <span class="status">
-                                                            <span class="dot ${post.status eq 'active' ? 'active' : 'inactive'}"></span>
-                                                            ${post.status}
-                                                        </span>
-                                                    </td>
-                                                    <td>${post.feature ? 'Yes' : 'No'}</td>
-                                                    <td>
-                                                        <a href="PostController?action=view&id=${post.postID}" class="btn btn-info btn-sm">
-                                                              View
-                                                        </a>
-                                                        <a href="PostController?action=edit&id=${post.postID}" class="btn btn-primary btn-sm">
-                                                            </i> Edit
-                                                        </a>
-                                                        <a href="PostController?action=delete&id=${post.postID}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this post?')">
-                                                             </i> Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                                <!-- Pagination start -->
-                                <div class="pagination-bx rounded-sm gray clearfix">
-                                    <ul class="pagination">
-                                        <c:if test="${requestScope.currentPage > 1}">
-                                            <li class="previous">
-                                                <a href="PostController?page=${requestScope.currentPage - 1}${requestScope.search != null ? '&search='.concat(requestScope.search) : ''}${requestScope.sortBy != null ? '&sortBy='.concat(requestScope.sortBy) : ''}${requestScope.category != null ? '&category='.concat(requestScope.category) : ''}${requestScope.author != null ? '&author='.concat(requestScope.author) : ''}${requestScope.status != null ? '&status='.concat(requestScope.status) : ''}${requestScope.feature != null ? '&feature='.concat(requestScope.feature) : ''}">
-                                                    <i class="ti-arrow-left"></i> Prev
-                                                </a>
-                                            </li>
-                                        </c:if>
-                                        
-                                        <c:forEach begin="1" end="${requestScope.totalPages}" var="i">
-                                            <li class="${requestScope.currentPage == i ? 'active' : ''}">
-                                                <a href="PostController?page=${i}${requestScope.search != null ? '&search='.concat(requestScope.search) : ''}${requestScope.sortBy != null ? '&sortBy='.concat(requestScope.sortBy) : ''}${requestScope.category != null ? '&category='.concat(requestScope.category) : ''}${requestScope.author != null ? '&author='.concat(requestScope.author) : ''}${requestScope.status != null ? '&status='.concat(requestScope.status) : ''}${requestScope.feature != null ? '&feature='.concat(requestScope.feature) : ''}">${i}</a>
-                                            </li>
+                                    <select name="category" class="sort-select">
+                                        <option value="" disabled selected hidden>Category</option>
+                                        <c:forEach var="category" items="${requestScope.categories}">
+                                            <option value="${category.postCategoryID}" ${param.category eq category.postCategoryID ? 'selected' : ''}>
+                                                ${category.postCategoryName}
+                                            </option>
                                         </c:forEach>
-                                        
-                                        <c:if test="${requestScope.currentPage < requestScope.totalPages}">
-                                            <li class="next">
-                                                <a href="PostController?page=${requestScope.currentPage + 1}${requestScope.search != null ? '&search='.concat(requestScope.search) : ''}${requestScope.sortBy != null ? '&sortBy='.concat(requestScope.sortBy) : ''}${requestScope.category != null ? '&category='.concat(requestScope.category) : ''}${requestScope.author != null ? '&author='.concat(requestScope.author) : ''}${requestScope.status != null ? '&status='.concat(requestScope.status) : ''}${requestScope.feature != null ? '&feature='.concat(requestScope.feature) : ''}">
-                                                    Next <i class="ti-arrow-right"></i>
-                                                </a>
-                                            </li>
-                                        </c:if>
-                                    </ul>
-                                </div>
-                                <!-- Pagination END -->
+                                    </select>
+
+                                    <select name="author" class="sort-select">
+                                        <option value="" disabled selected hidden>Author</option>
+                                        <c:forEach var="author" items="${requestScope.authors}">
+                                            <option value="${author.userID}" ${param.author eq author.userID ? 'selected' : ''}>
+                                                ${author.fullName}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+
+                                    <select name="status" class="sort-select">
+                                        <option value="" disabled selected hidden>Status</option>
+                                        <option value="active" ${param.status eq 'active' ? 'selected' : ''}>Active</option>
+                                        <option value="inactive" ${param.status eq 'inactive' ? 'selected' : ''}>Inactive</option>
+                                    </select>
+
+                                    <select name="feature" class="sort-select">
+                                        <option value="" disabled selected hidden>Feature</option>
+                                        <option value="true" ${param.feature eq 'true' ? 'selected' : ''}>Yes</option>
+                                        <option value="false" ${param.feature eq 'false' ? 'selected' : ''}>No</option>
+                                    </select>
+
+                                    <input type="hidden" name="page" value="1" />
+                                    <input type="hidden" name="search" value="${param.search}" />
+                                    <button type="submit" class="btn btn-warning">Apply Filters</button>
+                                    <a href="PostController" class="btn btn-warning reset">Reset Filters</a>
+                                </form>
                             </div>
                         </div>
+
+                        <div class="widget-inner">
+                            <div class="card-courses-list admin-courses">
+
+                                <table border="1">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Thumbnail</th>
+                                            <th>Title</th>
+                                            <th>Category</th>
+                                            <th>Owner</th>
+                                            <th>Create Date</th>
+                                            <th>Status</th>
+                                            <th>Feature</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="post" items="${requestScope.posts}" varStatus="loop">
+                                            <tr> 
+                                                <td>${post.postID}</td>
+                                                <td><img src="${post.thumbnail}" alt="Thumbnail" style="width: 50px; height: 50px; object-fit: cover;"></td>
+                                                <td>${post.title}</td>
+                                                <td>${post.postCategory.postCategoryName}</td>
+                                                <td>${post.owner.fullName}</td>
+                                                <td><fmt:formatDate value="${post.createDate}" pattern="dd/MM/yyyy"/></td>
+                                                <td>
+                                                    <span class="status">
+                                                        <span class="dot ${post.status eq 'active' ? 'active' : 'inactive'}"></span>
+                                                        ${post.status}
+                                                    </span>
+                                                </td>
+                                                <td>${post.feature ? 'Yes' : 'No'}</td>
+                                                <td>
+                                                    <a href="PostController?action=view&id=${post.postID}" class="btn btn-info btn-sm">
+                                                        View
+                                                    </a>
+                                                    <a href="PostController?action=edit&id=${post.postID}" class="btn btn-primary btn-sm">
+                                                        </i> Edit
+                                                    </a>
+                                                    <a href="PostController?action=delete&id=${post.postID}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this post?')">
+                                                        </i> Delete
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <!-- Pagination start -->
+                            <div class="pagination-bx rounded-sm gray clearfix">
+                                <ul class="pagination">
+                                    <c:if test="${requestScope.currentPage > 1}">
+                                        <li class="previous">
+                                            <a href="PostController?page=${requestScope.currentPage - 1}${requestScope.search != null ? '&search='.concat(requestScope.search) : ''}${requestScope.sortBy != null ? '&sortBy='.concat(requestScope.sortBy) : ''}${requestScope.category != null ? '&category='.concat(requestScope.category) : ''}${requestScope.author != null ? '&author='.concat(requestScope.author) : ''}${requestScope.status != null ? '&status='.concat(requestScope.status) : ''}${requestScope.feature != null ? '&feature='.concat(requestScope.feature) : ''}">
+                                                <i class="ti-arrow-left"></i> Prev
+                                            </a>
+                                        </li>
+                                    </c:if>
+
+                                    <c:forEach begin="1" end="${requestScope.totalPages}" var="i">
+                                        <li class="${requestScope.currentPage == i ? 'active' : ''}">
+                                            <a href="PostController?page=${i}${requestScope.search != null ? '&search='.concat(requestScope.search) : ''}${requestScope.sortBy != null ? '&sortBy='.concat(requestScope.sortBy) : ''}${requestScope.category != null ? '&category='.concat(requestScope.category) : ''}${requestScope.author != null ? '&author='.concat(requestScope.author) : ''}${requestScope.status != null ? '&status='.concat(requestScope.status) : ''}${requestScope.feature != null ? '&feature='.concat(requestScope.feature) : ''}">${i}</a>
+                                        </li>
+                                    </c:forEach>
+
+                                    <c:if test="${requestScope.currentPage < requestScope.totalPages}">
+                                        <li class="next">
+                                            <a href="PostController?page=${requestScope.currentPage + 1}${requestScope.search != null ? '&search='.concat(requestScope.search) : ''}${requestScope.sortBy != null ? '&sortBy='.concat(requestScope.sortBy) : ''}${requestScope.category != null ? '&category='.concat(requestScope.category) : ''}${requestScope.author != null ? '&author='.concat(requestScope.author) : ''}${requestScope.status != null ? '&status='.concat(requestScope.status) : ''}${requestScope.feature != null ? '&feature='.concat(requestScope.feature) : ''}">
+                                                Next <i class="ti-arrow-right"></i>
+                                            </a>
+                                        </li>
+                                    </c:if>
+                                </ul>
+                            </div>
+                            <!-- Pagination END -->
+                        </div>
                     </div>
-                    <!-- Your Profile Views Chart END-->
                 </div>
+                <!-- Your Profile Views Chart END-->
             </div>
-            <!--</main>-->
+        </div>
+        <!--</main>-->
         <div class="ttr-overlay"></div>
 
         <!-- External JavaScripts -->
- 
-<!-- External JavaScripts -->
-<script src="<%=request.getContextPath()%>/admin/assets/js/jquery.min.js"></script>
-<script src="<%=request.getContextPath()%>/admin/assets/vendors/bootstrap/js/popper.min.js"></script>
-<script src="<%=request.getContextPath()%>/admin/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
-<!--<script src="<%=request.getContextPath()%>/admin/assets/vendors/bootstrap-select/bootstrap-select.min.js"></script>  -->
-<script src="<%=request.getContextPath()%>/admin/assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
-<script src="<%=request.getContextPath()%>/admin/assets/vendors/magnific-popup/magnific-popup.js"></script>
-<script src="<%=request.getContextPath()%>/admin/assets/vendors/counter/waypoints-min.js"></script>
-<script src="<%=request.getContextPath()%>/admin/assets/vendors/counter/counterup.min.js"></script>
-<script src="<%=request.getContextPath()%>/admin/assets/vendors/imagesloaded/imagesloaded.js"></script>
-<script src="<%=request.getContextPath()%>/admin/assets/vendors/masonry/masonry.js"></script>
-<script src="<%=request.getContextPath()%>/admin/assets/vendors/masonry/filter.js"></script>
-<script src="<%=request.getContextPath()%>/admin/assets/vendors/owl-carousel/owl.carousel.js"></script>
-<script src='<%=request.getContextPath()%>/admin/assets/vendors/scroll/scrollbar.min.js'></script>
-<script src="<%=request.getContextPath()%>/admin/assets/js/functions.js"></script>
-<script src="<%=request.getContextPath()%>/admin/assets/vendors/chart/chart.min.js"></script>
-<script src="<%=request.getContextPath()%>/admin/assets/js/admin.js"></script>
-<script src='<%=request.getContextPath()%>/admin/assets/vendors/calendar/moment.min.js'></script>
-<script src='<%=request.getContextPath()%>/admin/assets/vendors/calendar/fullcalendar.js'></script>
-<!--  <script src='<%=request.getContextPath()%>/admin/assets/vendors/switcher/switcher.js'></script>-->
-<script>
-  $(document).ready(function() {
 
-    $('#calendar').fullCalendar({
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay,listWeek'
-      },
-      defaultDate: '2019-03-12',
-      navLinks: true, // can click day/week names to navigate views
+        <!-- External JavaScripts -->
+        <script src="<%=request.getContextPath()%>/admin/assets/js/jquery.min.js"></script>
+        <script src="<%=request.getContextPath()%>/admin/assets/vendors/bootstrap/js/popper.min.js"></script>
+        <script src="<%=request.getContextPath()%>/admin/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+        <!--<script src="<%=request.getContextPath()%>/admin/assets/vendors/bootstrap-select/bootstrap-select.min.js"></script>  -->
+        <script src="<%=request.getContextPath()%>/admin/assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
+        <script src="<%=request.getContextPath()%>/admin/assets/vendors/magnific-popup/magnific-popup.js"></script>
+        <script src="<%=request.getContextPath()%>/admin/assets/vendors/counter/waypoints-min.js"></script>
+        <script src="<%=request.getContextPath()%>/admin/assets/vendors/counter/counterup.min.js"></script>
+        <script src="<%=request.getContextPath()%>/admin/assets/vendors/imagesloaded/imagesloaded.js"></script>
+        <script src="<%=request.getContextPath()%>/admin/assets/vendors/masonry/masonry.js"></script>
+        <script src="<%=request.getContextPath()%>/admin/assets/vendors/masonry/filter.js"></script>
+        <script src="<%=request.getContextPath()%>/admin/assets/vendors/owl-carousel/owl.carousel.js"></script>
+        <script src='<%=request.getContextPath()%>/admin/assets/vendors/scroll/scrollbar.min.js'></script>
+        <script src="<%=request.getContextPath()%>/admin/assets/js/functions.js"></script>
+        <script src="<%=request.getContextPath()%>/admin/assets/vendors/chart/chart.min.js"></script>
+        <script src="<%=request.getContextPath()%>/admin/assets/js/admin.js"></script>
+        <script src='<%=request.getContextPath()%>/admin/assets/vendors/calendar/moment.min.js'></script>
+        <script src='<%=request.getContextPath()%>/admin/assets/vendors/calendar/fullcalendar.js'></script>
+        <!--  <script src='<%=request.getContextPath()%>/admin/assets/vendors/switcher/switcher.js'></script>-->
+        <script>
+                                                        $(document).ready(function () {
 
-      weekNumbers: true,
-      weekNumbersWithinDays: true,
-      weekNumberCalculation: 'ISO',
+                                                            $('#calendar').fullCalendar({
+                                                                header: {
+                                                                    left: 'prev,next today',
+                                                                    center: 'title',
+                                                                    right: 'month,agendaWeek,agendaDay,listWeek'
+                                                                },
+                                                                defaultDate: '2019-03-12',
+                                                                navLinks: true, // can click day/week names to navigate views
 
-      editable: true,
-      eventLimit: true, // allow "more" link when too many events
-      events: [
-        {
-          title: 'All Day Event',
-          start: '2019-03-01'
-        },
-        {
-          title: 'Long Event',
-          start: '2019-03-07',
-          end: '2019-03-10'
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: '2019-03-09T16:00:00'
-        },
-        {
-          id: 999,
-          title: 'Repeating Event',
-          start: '2019-03-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2019-03-11',
-          end: '2019-03-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2019-03-12T10:30:00',
-          end: '2019-03-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2019-03-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2019-03-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2019-03-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2019-03-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2019-03-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2019-03-28'
-        }
-      ]
-    });
+                                                                weekNumbers: true,
+                                                                weekNumbersWithinDays: true,
+                                                                weekNumberCalculation: 'ISO',
 
-  });
+                                                                editable: true,
+                                                                eventLimit: true, // allow "more" link when too many events
+                                                                events: [
+                                                                    {
+                                                                        title: 'All Day Event',
+                                                                        start: '2019-03-01'
+                                                                    },
+                                                                    {
+                                                                        title: 'Long Event',
+                                                                        start: '2019-03-07',
+                                                                        end: '2019-03-10'
+                                                                    },
+                                                                    {
+                                                                        id: 999,
+                                                                        title: 'Repeating Event',
+                                                                        start: '2019-03-09T16:00:00'
+                                                                    },
+                                                                    {
+                                                                        id: 999,
+                                                                        title: 'Repeating Event',
+                                                                        start: '2019-03-16T16:00:00'
+                                                                    },
+                                                                    {
+                                                                        title: 'Conference',
+                                                                        start: '2019-03-11',
+                                                                        end: '2019-03-13'
+                                                                    },
+                                                                    {
+                                                                        title: 'Meeting',
+                                                                        start: '2019-03-12T10:30:00',
+                                                                        end: '2019-03-12T12:30:00'
+                                                                    },
+                                                                    {
+                                                                        title: 'Lunch',
+                                                                        start: '2019-03-12T12:00:00'
+                                                                    },
+                                                                    {
+                                                                        title: 'Meeting',
+                                                                        start: '2019-03-12T14:30:00'
+                                                                    },
+                                                                    {
+                                                                        title: 'Happy Hour',
+                                                                        start: '2019-03-12T17:30:00'
+                                                                    },
+                                                                    {
+                                                                        title: 'Dinner',
+                                                                        start: '2019-03-12T20:00:00'
+                                                                    },
+                                                                    {
+                                                                        title: 'Birthday Party',
+                                                                        start: '2019-03-13T07:00:00'
+                                                                    },
+                                                                    {
+                                                                        title: 'Click for Google',
+                                                                        url: 'http://google.com/',
+                                                                        start: '2019-03-28'
+                                                                    }
+                                                                ]
+                                                            });
 
-</script>
+                                                        });
+
+        </script>
     </body>
 </html>
