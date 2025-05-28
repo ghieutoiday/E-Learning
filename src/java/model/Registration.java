@@ -116,5 +116,20 @@ public class Registration {
         this.validTo = validTo;
     }
     
-    
+    @Override
+public String toString() {
+    return "Registration{" +
+           "registrationID=" + registrationID +
+           ", user=" + (user != null ? user.getFullName() : "null") +
+           ", lastUpdateBy=" + (lastUpdateBy != null ? lastUpdateBy.getFullName() : "null") +
+           ", course=" + (course != null ? course.getCourseName() : "null") +
+           ", pricePackage=" + (pricePackage != null ? pricePackage.getName() : "null") +
+           ", totalCost=" + totalCost +
+           ", status='" + status + '\'' +
+           ", registrationTime=" + registrationTime +
+           ", validFrom=" + validFrom +
+           ", validTo=" + validTo +
+           '}';
+}
+
 }
