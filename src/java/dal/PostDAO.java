@@ -88,8 +88,8 @@ public class PostDAO extends DBContext {
     public int getTotalPostAfterSearch(String titleSearch) {
 
         String sql = " SELECT COUNT(*)"
-                + " FROM Post"
-                + " where status = 'Active' AND LOWER(title) LIKE LOWER(?)";
+                   + " FROM Post"
+                   + " where status = 'Active' AND LOWER(title) LIKE LOWER(?)";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -167,7 +167,7 @@ public class PostDAO extends DBContext {
                 String status = rs.getString(8);
                 boolean feature = rs.getBoolean(9);
                 Date createDate = rs.getDate(10);
-                Date updateDate = rs.getDate(10);
+                Date updateDate = rs.getDate(11);
 
                 //Lấy entity
                 post = new Post(id, owner, title, postCategory, thumbnail, briefInfor, description, status, feature, createDate, updateDate);
@@ -222,7 +222,7 @@ public class PostDAO extends DBContext {
                 String status = rs.getString(8);
                 boolean feature = rs.getBoolean(9);
                 Date createDate = rs.getDate(10);
-                Date updateDate = rs.getDate(10);
+                Date updateDate = rs.getDate(11);
 
                 //Lấy entity
                 Post post = new Post(id, owner, title, postCategory, thumbnail, briefInfor, description, status, feature, createDate, updateDate);
@@ -240,10 +240,10 @@ public class PostDAO extends DBContext {
         List<Post> list = new ArrayList();
         try {
             //String sql = "Select * from Post where postCategoryID = " + postCategoryID;
-            String sql = " SELECT * FROM Post"
-                    + " WHERE status = 'Active' AND postCategoryID =  " + postCategoryID
-                    + " ORDER BY updateDate DESC "
-                    + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+            String sql =  " SELECT * FROM Post"
+                        + " WHERE status = 'Active' AND postCategoryID =  " + postCategoryID
+                        + " ORDER BY updateDate DESC "
+                        + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, (page - 1) * pageSize);

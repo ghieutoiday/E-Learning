@@ -74,8 +74,6 @@ public class PostController extends HttpServlet {
                 //Lấy và tạo 1 attribute PostDetail cụ thể để hiện thị trong trang Blog Detail
                 Post postDetail = PostDAO.getInstance().getPostByID(postID);
                 request.setAttribute("postDetail", postDetail);
-//                request.getRequestDispatcher("blog-details.jsp").forward(request, response);
-//                return;
 
             } catch (NumberFormatException e) {
                 System.out.println(e);

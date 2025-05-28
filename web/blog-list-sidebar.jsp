@@ -276,7 +276,7 @@
                                     <c:if test="${totalPages > 1}">
                                         <div class="pagination-bx rounded-sm gray clearfix">
                                             <ul class="pagination">
-                                                <!-- Nút Prev -->
+                                                <!-- NÃºt Prev -->
                                                 <c:choose>
                                                     <c:when test="${currentPage == 1}">
                                                         <li class="previous disabled">
@@ -294,14 +294,14 @@
                                                     </c:otherwise>
                                                 </c:choose>
 
-                                                <!-- Các trang -->
+                                                <!-- CÃ¡c trang -->
                                                 <c:forEach begin="1" end="${totalPages}" var="i">
                                                     <li class="${currentPage == i ? 'active' : ''}">
                                                         <a href="${pageContext.request.contextPath}/postcontroller?page=${i}&pageforward=bloglist&titleSearch=${param.titleSearch}">${i}</a>
                                                     </li>
                                                 </c:forEach>
 
-                                                <!-- Nút Next -->
+                                                <!-- Nut Next -->
                                                 <c:choose>
                                                     <c:when test="${currentPage == totalPages}">
                                                         <li class="next disabled">
@@ -345,7 +345,7 @@
                                         <div class = "widge post-category">
                                             <h6 class="widget-title post-category">Post Category</h6>
 
-                                            <!--L?y ra list Post Category, sau khi click vào tên thì chuy?n sang postcontroller-->
+                                            <!--L?y ra list Post Category, sau khi click vÃ o tÃªn thÃ¬ chuy?n sang postcontroller-->
                                             <c:forEach items="${requestScope.listPostCategory}" var="a">
                                                 <p><a href="postcontroller?postCategoryID=${a.postCategoryID}&pageforward=bloglist">${a.postCategoryName}</a></p>
                                                 </c:forEach>    

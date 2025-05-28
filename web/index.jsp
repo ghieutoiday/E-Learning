@@ -110,7 +110,7 @@
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <li><a href="my-courses.jsp" class="btn-link customer-course"><p>My Courses</p></a></li>
                                         &nbsp;&nbsp;&nbsp;
-                                        <li><a href="my-registrations.jsp" class="btn-link customer-registration"><p>My Registrations</p></a></li>
+                                        <li><a href="registrationcontroller" class="btn-link customer-registration"><p>My Registrations</p></a></li>
                                     </ul>
                                 </div>
                             </div>
