@@ -65,5 +65,10 @@ public class Setting {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "Setting{" + "settingID=" + settingID + ", type=" + type + ", value=" + value + ", orderNum=" + orderNum + ", status=" + status + '}';
+    }
+
     
 }

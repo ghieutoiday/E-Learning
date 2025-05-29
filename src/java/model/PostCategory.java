@@ -45,6 +45,11 @@ public class PostCategory {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "PostCategory{" + "postCategoryID=" + postCategoryID + ", postCategoryName=" + postCategoryName + ", description=" + description + '}';
+    }
     
     
 }

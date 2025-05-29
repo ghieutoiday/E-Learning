@@ -63,6 +63,11 @@ public class SubjectDimension {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "SubjectDimension{" + "dimensionID=" + dimensionID + ", course=" + course + ", type=" + type + ", name=" + name + ", description=" + description + '}';
+    }
     
     
 }

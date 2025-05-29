@@ -108,5 +108,10 @@ public class Course {
         this.createDate = createDate;
     }
 
+    @Override
+    public String toString() {
+        return "Course{" + "courseID=" + courseID + ", courseName=" + courseName + ", courseCategory=" + courseCategory + ", thumbnail=" + thumbnail + ", description=" + description + ", owner=" + owner + ", status=" + status + ", numberOfLesson=" + numberOfLesson + ", createDate=" + createDate + '}';
+    }
+
     
 }

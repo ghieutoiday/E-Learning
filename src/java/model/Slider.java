@@ -64,6 +64,11 @@ public class Slider {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "Slider{" + "sliderID=" + sliderID + ", title=" + title + ", image=" + image + ", backlink=" + backlink + ", status=" + status + '}';
+    }
+
     
     
 }

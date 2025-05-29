@@ -86,6 +86,11 @@ public class UserLessonProgress {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    @Override
+    public String toString() {
+        return "UserLessonProgress{" + "userLessonProgressID=" + userLessonProgressID + ", user=" + user + ", lesson=" + lesson + ", status=" + status + ", completedAt=" + completedAt + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
+    }
     
     
 }

@@ -105,6 +105,11 @@ public class Quiz {
     public void setQuizType(String quizType) {
         this.quizType = quizType;
     }
+
+    @Override
+    public String toString() {
+        return "Quiz{" + "quizID=" + quizID + ", lesson=" + lesson + ", name=" + name + ", course=" + course + ", level=" + level + ", numberQuestions=" + numberQuestions + ", duration=" + duration + ", passRate=" + passRate + ", quizType=" + quizType + '}';
+    }
     
     
 }

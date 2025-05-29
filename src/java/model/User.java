@@ -110,5 +110,10 @@ public class User {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "User{" + "userID=" + userID + ", fullName=" + fullName + ", email=" + email + ", password=" + password + ", gender=" + gender + ", mobile=" + mobile + ", address=" + address + ", role=" + role + ", avatar=" + avatar + ", status=" + status + '}';
+    }
+
     
 }

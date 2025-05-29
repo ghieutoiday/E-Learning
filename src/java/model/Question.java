@@ -103,6 +103,11 @@ public class Question {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Question{" + "questionID=" + questionID + ", course=" + course + ", lesson=" + lesson + ", demension=" + demension + ", content=" + content + ", media=" + media + ", explanation=" + explanation + ", level=" + level + ", status=" + status + '}';
+    }
     
     
 }

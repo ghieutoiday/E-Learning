@@ -35,6 +35,11 @@ public class QuizQuestion {
     public void setQuestion(Question question) {
         this.question = question;
     }
+
+    @Override
+    public String toString() {
+        return "QuizQuestion{" + "quizID=" + quizID + ", question=" + question + '}';
+    }
     
     
     

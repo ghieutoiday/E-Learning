@@ -93,6 +93,11 @@ public class PricePackage {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "PricePackage{" + "pricePackageID=" + pricePackageID + ", course=" + course + ", name=" + name + ", accessDuration=" + accessDuration + ", listPrice=" + listPrice + ", salePrice=" + salePrice + ", description=" + description + ", status=" + status + '}';
+    }
     
     
 }

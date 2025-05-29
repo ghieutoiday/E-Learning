@@ -126,4 +126,11 @@ public class Registration {
         LessonDAO lD = new LessonDAO();
         return lD.getTotalNumberOfLessonInCourse(this.getCourse().getCourseID());
     }
+
+    @Override
+    public String toString() {
+        return "Registration{" + "registrationID=" + registrationID + ", user=" + user + ", lastUpdateBy=" + lastUpdateBy + ", course=" + course + ", pricePackage=" + pricePackage + ", totalCost=" + totalCost + ", status=" + status + ", registrationTime=" + registrationTime + ", validFrom=" + validFrom + ", validTo=" + validTo + '}';
+    }
+    
+    
 }

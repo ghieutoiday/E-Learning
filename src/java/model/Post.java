@@ -124,6 +124,11 @@ public class Post {
         this.updateDate = updateDate;
     }
 
+    @Override
+    public String toString() {
+        return "Post{" + "postID=" + postID + ", owner=" + owner + ", title=" + title + ", postCategory=" + postCategory + ", thumbnail=" + thumbnail + ", briefInfo=" + briefInfo + ", description=" + description + ", status=" + status + ", feature=" + feature + ", createDate=" + createDate + ", updateDate=" + updateDate + '}';
+    }
+
     
     
 }

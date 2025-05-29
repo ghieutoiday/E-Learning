@@ -93,5 +93,10 @@ public class Lesson {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "Lesson{" + "lessonID=" + lessonID + ", course=" + course + ", name=" + name + ", contentHtml=" + contentHtml + ", contentVideo=" + contentVideo + ", type=" + type + ", orderNum=" + orderNum + ", status=" + status + '}';
+    }
+
     
 }

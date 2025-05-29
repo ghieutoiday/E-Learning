@@ -55,6 +55,11 @@ public class AnswerOption {
     public void setIsCorrect(boolean isCorrect) {
         this.isCorrect = isCorrect;
     }
+
+    @Override
+    public String toString() {
+        return "AnswerOption{" + "answerOptionID=" + answerOptionID + ", question=" + question + ", content=" + content + ", isCorrect=" + isCorrect + '}';
+    }
     
     
 }
