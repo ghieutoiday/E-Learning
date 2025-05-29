@@ -4,7 +4,6 @@
  */
 package dal;
 
-import model.Course;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

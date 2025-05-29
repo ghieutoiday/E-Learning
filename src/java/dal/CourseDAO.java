@@ -39,7 +39,6 @@ public class CourseDAO extends DBContext {
                 + "      ,[createDate]\n"
                 + " FROM [dbo].[Course]\n"
                 + " where [courseID] = ?";
-
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, courseID);
