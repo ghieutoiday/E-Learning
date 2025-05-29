@@ -105,31 +105,7 @@
             .add-new-btn:active {
                 transform: translateY(0);
             }
-            .filter-bar {
-                padding: 20px 30px;
-                display: flex;
-                flex-wrap: nowrap;
-                align-items: center;
-                background-color: #ffffff;
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-                border-radius: 8px;
-                margin: 20px;
-                justify-content: space-between;
-            }
-            .filter-bar input, .filter-bar select {
-                padding: 10px 15px;
-                font-size: 14px;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-                outline: none;
-                transition: border-color 0.3s ease;
-                flex: 1;
-                max-width: 200px;
-                margin-right: 10px;
-            }
-            .filter-bar input:focus, .filter-bar select:focus {
-                border-color: #007bff;
-            }
+
             table {
                 width: 100%;
                 border-collapse: collapse;
@@ -240,6 +216,47 @@
             .sort-icon {
                 font-size: 12px;
             }
+            .filter-form {
+                margin-bottom: 20px;
+                padding: 15px;
+                border: 1px solid #eee;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+
+                display: flex;
+                gap: 10px;
+                align-items: center;
+
+                /* Bỏ flex-wrap để các phần tử nằm trên 1 hàng */
+                flex-wrap: nowrap;
+
+                /* Không cho xuống dòng */
+                white-space: nowrap;
+
+                /* Để dropdown có thể hiển thị ra bên ngoài */
+                overflow: visible;
+                position: relative; /* nếu dropdown cần định vị */
+            }
+
+            .filter-form input[type="text"],
+            .filter-form select,
+            .filter-form button {
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+            .filter-form button {
+                background-color: #007bff;
+                color: white;
+                cursor: pointer;
+                border: none;
+            }
+            .filter-form button:hover {
+                background-color: #0056b3;
+            }
+
+
+
 
 
         </style>
@@ -421,7 +438,7 @@
                 <div class="page-banner ovbl-dark">
                     <div class="container">
                         <div class="page-banner-entry">
-                            <h1 class="text-white">Subject List</h1>
+                            <h1 class="text-white">Registration List</h1>
                         </div>
                     </div>
                 </div>
@@ -430,7 +447,7 @@
                     <div class="container">
                         <ul class="list-inline">
                             <li><a href="#">Home</a></li>
-                            <li>Subject List</li>
+                            <li>Registration List</li>
                         </ul>
                     </div>
                 </div>
@@ -442,12 +459,55 @@
                                 <button class="add-new-btn">Add New</button>
                             </div>
                             <div class="filter-bar">
-                                <input type="text" placeholder="Search Email"/>
-                                <select><option>Subject</option></select>
-                                <select><option>Package</option></select>
-                                <select><option>From</option></select>
-                                <select><option>To</option></select>
-                                <select><option>Status</option></select>
+                                <form action="registrationsalercontroller" method="GET" class="filter-form">
+                                    <input type="text" name="emailSearch" placeholder="Search Email"
+                                           value="${param.emailSearch != null ? param.emailSearch : ''}"/>
+
+                                    <select name="courseName">
+                                        <option value="">All Courses</option>
+                                        <c:forEach var="course" items="${courseList}">
+                                            <option value="${course.courseName}" 
+                                                    ${param.courseName != null && param.courseName == course.courseName ? 'selected' : ''}>
+                                                ${course.courseName}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+
+                                    <select name="name">
+                                        <option value="">All Packages</option>
+                                        <c:forEach var="pkg" items="${packageList}">
+                                            <option value="${pkg.name}" ${name != null && name.equals(pkg.name) ? 'selected' : ''}>
+                                                ${pkg.name}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+
+
+                                    <select name="validFrom">
+                                        <option value="">From</option>
+                                        <c:forEach var="fromDate" items="${fromDateList}">
+                                            <option value="${fromDate}" ${param.validFrom == fromDate ? 'selected' : ''}>${fromDate}</option>
+                                        </c:forEach>
+                                    </select>
+
+                                    <select name="validTo">
+                                        <option value="">To</option>
+                                        <c:forEach var="fromDate" items="${fromDateList}">
+                                            <option value="${fromDate}" ${param.validFrom == fromDate ? 'selected' : ''}>${fromDate}</option>
+                                        </c:forEach>
+                                    </select>
+
+
+                                    <select name="status">
+                                        <option value="">All Status</option>
+                                        <option value="Submitted" ${param.status == 'Submitted' ? 'selected' : ''}>Submitted</option>
+                                        <option value="Paid" ${param.status == 'Paid' ? 'selected' : ''}>Paid</option>
+                                        <option value="Cancelled" ${param.status == 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+                                    </select>
+
+                                    <button type="submit">Apply Filter</button>
+                                </form>
+
                             </div>
 
                             <table>

@@ -4,6 +4,9 @@
  */
 package controller;
 
+import dal.CourseDAO;
+import dal.PostDAO;
+import dal.PricePackageDAO;
 import dal.RegistrationDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +16,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Course;
+import model.Post;
+import model.PricePackage;
 import model.Registration;
 
 /**
@@ -74,27 +80,35 @@ public class RegistrationSalerController extends HttpServlet {
             sortOrder = "asc"; // Mặc định sắp xếp tăng dần
         }
 
-        // Gửi lại các giá trị sort hiện tại để JSP biết cột nào đang được sort và theo chiều nào
+        String emailSearch = request.getParameter("emailSearch");
+        String courseName = request.getParameter("courseName");
+        String name = request.getParameter("name");
+        String status = request.getParameter("status");
+
+        // Gửi lại các tham số sang JSP để giữ input
         request.setAttribute("sortBy", sortBy);
         request.setAttribute("sortOrder", sortOrder);
-
-        List<Registration> listRegistrationBySaler = RegistrationDAO.getInstance().getAllRegistrationAfterSort(sortBy, sortOrder);
+        request.setAttribute("emailSearch", emailSearch);
+        request.setAttribute("courseName", courseName);
+        request.setAttribute("name", name);
+        request.setAttribute("status", status);
+        
+        List<Course> courseList = new CourseDAO().getAllCourse();
+        List<PricePackage> packageList = new PricePackageDAO().getAllPricePackage();
+        
+        // Gọi DAO đã kết hợp để lấy danh sách đăng ký
+        List<Registration> listRegistrationBySaler = RegistrationDAO.getInstance().getRegistrationsByAllFilters(emailSearch, courseName, name, status, sortBy, sortOrder);
+        
+        request.setAttribute("courseList", courseList);
+        request.setAttribute("packageList", packageList);
         request.setAttribute("listRegistrationBySaler", listRegistrationBySaler);
         request.getRequestDispatcher("registration-list-saler.jsp").forward(request, response);
     }
+    
+    
 
-    public static void main(String[] args) {
-        List<Registration> list = RegistrationDAO.getInstance().getAllRegistration();
 
-        if (list == null || list.isEmpty()) {
-            System.out.println("Không có dữ liệu đăng ký nào.");
-        } else {
-            System.out.println("Danh sách đăng ký:");
-            for (Registration reg : list) {
-                System.out.println(reg);
-            }
-        }
-    }
+
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -105,7 +119,7 @@ public class RegistrationSalerController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -116,7 +130,7 @@ public class RegistrationSalerController extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

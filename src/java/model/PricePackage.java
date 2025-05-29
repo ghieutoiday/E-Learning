@@ -94,5 +94,18 @@ public class PricePackage {
         this.status = status;
     }
     
-    
+    @Override
+public String toString() {
+    return "PricePackage{" +
+           "id=" + pricePackageID +
+           ", course=" + (course != null ? course.getCourseName() : "null") +
+           ", name='" + name + '\'' +
+           ", accessDuration=" + accessDuration +
+           ", listPrice=" + listPrice +
+           ", salePrice=" + salePrice +
+           ", description='" + description + '\'' +
+           ", status='" + status + '\'' +
+           '}';
+}
+
 }
