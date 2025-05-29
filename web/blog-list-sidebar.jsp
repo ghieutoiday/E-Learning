@@ -180,9 +180,9 @@
                                         <ul class="sub-menu">
                                             <li><a href="blog-classic-grid.jsp">Blog Classic</a></li>
                                             <li><a href="blog-classic-sidebar.jsp">Blog Classic Sidebar</a></li>
-                                            <li><a href="postcontroller?pageforward=bloglist">Blog List Sidebar</a></li>
+                                            <li><a href="blogcontroller?pageforward=bloglist">Blog List Sidebar</a></li>
                                             <li><a href="blog-standard-sidebar.jsp">Blog Standard Sidebar</a></li>
-                                            <li><a href="postcontroller?pageforward=blogdetail">Blog Details</a></li>
+                                            <li><a href="blogcontroller?pageforward=blogdetail">Blog Details</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-dashboard"><a href="javascript:;">Dashboard <i class="fa fa-chevron-down"></i></a>
@@ -261,7 +261,7 @@
                                                     <li><a href="#"><i class="fa fa-user"></i>${o.owner.fullName}</a></li>
 
                                                 </ul>
-                                                <h5 class="post-title"><a href="postcontroller?postID=${o.postID}&pageforward=blogdetail">${o.title}</a></h5>
+                                                <h5 class="post-title"><a href="blogcontroller?postID=${o.postID}&pageforward=blogdetail">${o.title}</a></h5>
                                                 <div class="post-category">
                                                     <a href="#"><i class="fa fa-folder-open"></i> ${o.postCategory.postCategoryName}</a>
                                                 </div>
@@ -287,7 +287,7 @@
                                                     </c:when>
                                                     <c:otherwise>
                                                         <li class="previous">
-                                                            <a href="${pageContext.request.contextPath}/postcontroller?page=${currentPage - 1}&pageforward=bloglist&titleSearch=${param.titleSearch}">
+                                                            <a href="${pageContext.request.contextPath}/blogcontroller?page=${currentPage - 1}&pageforward=bloglist&titleSearch=${param.titleSearch}">
                                                                 <i class="ti-arrow-left"></i> Prev
                                                             </a>
                                                         </li>
@@ -297,7 +297,7 @@
                                                 <!-- CÃ¡c trang -->
                                                 <c:forEach begin="1" end="${totalPages}" var="i">
                                                     <li class="${currentPage == i ? 'active' : ''}">
-                                                        <a href="${pageContext.request.contextPath}/postcontroller?page=${i}&pageforward=bloglist&titleSearch=${param.titleSearch}">${i}</a>
+                                                        <a href="${pageContext.request.contextPath}/blogcontroller?page=${i}&pageforward=bloglist&titleSearch=${param.titleSearch}">${i}</a>
                                                     </li>
                                                 </c:forEach>
 
@@ -312,7 +312,7 @@
                                                     </c:when>
                                                     <c:otherwise>
                                                         <li class="next">
-                                                            <a href="${pageContext.request.contextPath}/postcontroller?page=${currentPage + 1}&pageforward=bloglist&titleSearch=${param.titleSearch}">
+                                                            <a href="${pageContext.request.contextPath}/blogcontroller?page=${currentPage + 1}&pageforward=bloglist&titleSearch=${param.titleSearch}">
                                                                 Next <i class="ti-arrow-right"></i>
                                                             </a>
                                                         </li>
@@ -330,7 +330,7 @@
                                         <div class="widget">
                                             <h6 class="widget-title">Search</h6>
                                             <div class="search-bx style-1">
-                                                <form role="search" action="postcontroller" method="get">
+                                                <form role="search" action="blogcontroller" method="get">
                                                     <input type="hidden" name="pageforward" value="bloglist" />
                                                     <div class="input-group">
                                                         <input name="titleSearch" class="form-control" placeholder="Enter your keywords..." type="text">
@@ -345,9 +345,9 @@
                                         <div class = "widge post-category">
                                             <h6 class="widget-title post-category">Post Category</h6>
 
-                                            <!--L?y ra list Post Category, sau khi click vÃ o tÃªn thÃ¬ chuy?n sang postcontroller-->
+                                            <!--L?y ra list Post Category, sau khi click vÃ o tÃªn thÃ¬ chuy?n sang blogcontroller-->
                                             <c:forEach items="${requestScope.listPostCategory}" var="a">
-                                                <p><a href="postcontroller?postCategoryID=${a.postCategoryID}&pageforward=bloglist">${a.postCategoryName}</a></p>
+                                                <p><a href="blogcontroller?postCategoryID=${a.postCategoryID}&pageforward=bloglist">${a.postCategoryName}</a></p>
                                                 </c:forEach>    
                                             </h6>
                                         </div>
@@ -361,7 +361,7 @@
                                                         <div class="ttr-post-media"> <img src="${b.thumbnail}" alt="" style="width: 200px; height: 65px; object-fit: cover; display: block;"> </div>
                                                         <div class="ttr-post-info">
                                                             <div class="ttr-post-header">
-                                                                <h6 class="post-title"><a href="postcontroller?postID=${b.postID}&pageforward=blogdetail">${b.title}</a></h6>
+                                                                <h6 class="post-title"><a href="blogcontroller?postID=${b.postID}&pageforward=blogdetail">${b.title}</a></h6>
                                                             </div>
                                                             <ul class="media-post">
                                                                 <li><a href="#"><i class="fa fa-calendar"></i>${b.updateDate}</a></li>

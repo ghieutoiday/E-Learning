@@ -20,20 +20,20 @@ import model.User;
  *
  * @author ASUS
  */
-public class PostDAO extends DBContext {
+public class BlogDAO extends DBContext {
 
-    private static PostDAO instance;
+    private static BlogDAO instance;
 
-    public static PostDAO getInstance() {
+    public static BlogDAO getInstance() {
 
         if (instance == null) {
-            instance = new PostDAO();
+            instance = new BlogDAO();
         }
 
         return instance;
     }
 
-    public PostDAO() {
+    public BlogDAO() {
         super();
     }
 
@@ -60,7 +60,7 @@ public class PostDAO extends DBContext {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BlogDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
@@ -79,7 +79,7 @@ public class PostDAO extends DBContext {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BlogDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return 0;
@@ -100,7 +100,7 @@ public class PostDAO extends DBContext {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BlogDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return 0;
@@ -118,7 +118,7 @@ public class PostDAO extends DBContext {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BlogDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return 0;

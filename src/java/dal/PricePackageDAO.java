@@ -27,7 +27,7 @@ public class PricePackageDAO extends DBContext{
     public PricePackage getPricePackageByPricePackageID(int pricePackageId) {
         PricePackage pricePackage = null;
         try {
-            String sql = "Select * from PricePackage where status = 'Active' AND pricePackageID = " + pricePackageId;
+            String sql = "Select * from PricePackage where pricePackageID = " + pricePackageId;
 
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();

@@ -4,6 +4,7 @@
  */
 package model;
 
+import dal.LessonDAO;
 import java.util.Date;
 
 /**
@@ -116,5 +117,13 @@ public class Registration {
         this.validTo = validTo;
     }
     
+    public int getTotalCompletedLesson() {
+        LessonDAO lD = new LessonDAO();
+        return lD.getTotalNumberOfCompletedLessonInCourse(this.getUser().getUserID(), this.getCourse().getCourseID());
+    }
     
+    public int getTotalLesson() {
+        LessonDAO lD = new LessonDAO();
+        return lD.getTotalNumberOfLessonInCourse(this.getCourse().getCourseID());
+    }
 }

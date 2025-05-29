@@ -166,7 +166,7 @@
 
                                         <!--My Course / My Registration-->
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <li><a href="my-courses.jsp" class="btn-link customer-course"><p>My Courses</p></a></li>
+                                        <li><a href="mycoursecontroller" class="btn-link customer-course"><p>My Courses</p></a></li>
                                         &nbsp;&nbsp;&nbsp;
                                         <li><a href="registrationcontroller" class="btn-link customer-registration"><p>My Registrations</p></a></li>
                                     </ul>
@@ -245,9 +245,9 @@
                                         <ul class="sub-menu">
                                             <li><a href="blog-classic-grid.jsp">Blog Classic</a></li>
                                             <li><a href="blog-classic-sidebar.jsp">Blog Classic Sidebar</a></li>
-                                            <li><a href="blog-list-sidebar.jsp">Blog List Sidebar</a></li>
+                                            <li><a href="blogcontroller?pageforward=bloglist">Blog List Sidebar</a></li>
                                             <li><a href="blog-standard-sidebar.jsp">Blog Standard Sidebar</a></li>
-                                            <li><a href="blog-details.jsp">Blog Details</a></li>
+                                            <li><a href="blogcontroller?pageforward=blogdetail">Blog Details</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-dashboard"><a href="javascript:;">Dashboard <i class="fa fa-chevron-down"></i></a>
@@ -317,19 +317,24 @@
                                     <div class="widget courses-search-bx placeani">
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <label>Search Courses</label>
-                                                <input name="dzName" type="text" required class="form-control">
+                                                <form action="registrationcontroller">
+                                                    <label>Search Courses</label>
+                                                    <input name="searchCourseName" type="text" required class="form-control">
+                                                    <input name="action" value="search" hidden>
+                                                    <button type="submit" hidden></button> <!-- nút ?n ?? form luôn submit ???c khi nh?n Enter -->
+                                                </form>
+
                                             </div>
                                         </div>
                                     </div>
                                     <div class="widget widget_archive">
                                         <h5 class="widget-title style-1">All Courses</h5>
                                         <ul>
-                                            
-<!--                                            courseCategory = 0 ngh?a là nó s? x? ra list toàn b? Registration-->
-                                            <li><a href="registrationcontroller?courseCategoryID=0">General</a></li>
-                                            <c:forEach items="${requestScope.listCourseCategory}" var="a">
-                                                <li><a href="registrationcontroller?courseCategoryID=${a.courseCategory}">${a.courseCategoryName}</a></li>
+
+                                            <!--courseCategory = 0 ngh?a là nó s? x? ra list toàn b? Registration-->
+                                            <li><a href="registrationcontroller?courseCategoryID=0&action=filter">General</a></li>
+                                                <c:forEach items="${requestScope.listCourseCategory}" var="a">
+                                                <li><a href="registrationcontroller?courseCategoryID=${a.courseCategory}&action=filter">${a.courseCategoryName}</a></li>
                                                 </c:forEach>
                                         </ul>
                                     </div>

@@ -57,7 +57,7 @@ public class CourseDAO extends DBContext {
         }
         return course;
     }
-    
+
     public List getAllCourse() {
         List<Course> list = new ArrayList<>();
         String sql = "SELECT [courseID]\n"
@@ -124,7 +124,7 @@ public class CourseDAO extends DBContext {
         }
         return list;
     }
-    
+
     //Hàm get all course theo status
     public List<Course> getAllCoureByStatus(String status) {
         List<Course> list = new ArrayList<>();
@@ -159,7 +159,7 @@ public class CourseDAO extends DBContext {
         }
         return list;
     }
-    
+
     // Hàm get all course theo categoryID
     public List<Course> getAllCoureByCategory(int categoryId) {
         List<Course> list = new ArrayList<>();
@@ -194,11 +194,46 @@ public class CourseDAO extends DBContext {
         }
         return list;
     }
-    
-    
+
+    //Hàm lấy tất cả các course có courseName ứng với 1 phần hoặc toàn bộ courseName sau khi search
+    //hàm này lấy để dùng trong 
+    public List<Course> getAllCoureByCourseName(String courseName) {
+        List<Course> list = new ArrayList<>();
+        Course course = null;
+        String sql = "SELECT [courseID]\n"
+                + "      ,[courseName]\n"
+                + "      ,[courseCategoryID]\n"
+                + "      ,[thumbnail]\n"
+                + "      ,[description]\n"
+                + "      ,[ownerID]\n"
+                + "      ,[status]\n"
+                + "      ,[numberOfLesson]\n"
+                + "      ,[createDate]\n"
+                + " FROM [dbo].[Course]\n"
+                + " where LOWER(courseName) LIKE LOWER(?)";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + courseName + "%");
+            ResultSet rs = ps.executeQuery();
+            CourseCategoryDAO courseCategoryDAO = new CourseCategoryDAO();
+            UserDAO userDao = new UserDAO();
+            while (rs.next()) {
+                CourseCategory courseCategory = courseCategoryDAO.getCategoryById(rs.getInt("courseCategoryID"));
+                User user = userDao.getUserByID(rs.getInt("ownerID"));
+                course = new Course(rs.getInt("courseID"), rs.getString("courseName"), courseCategory,
+                        rs.getString("thumbnail"), rs.getString("description"), user, rs.getString("status"), rs.getInt("numberOfLesson"), rs.getDate("createDate"));
+                list.add(course);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         CourseDAO courseDao = new CourseDAO();
-        System.out.println(courseDao.getCoureByCourseID(1).getCourseName());
+        System.out.println(courseDao.getAllCoureByCourseName("ac").get(0).getCourseName());
     }
 
 }

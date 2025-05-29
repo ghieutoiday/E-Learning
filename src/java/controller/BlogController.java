@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.PostDAO;
+import dal.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -20,8 +20,8 @@ import model.PostCategory;
  *
  * @author ASUS
  */
-@WebServlet(name = "PostController", urlPatterns = {"/postcontroller"})
-public class PostController extends HttpServlet {
+@WebServlet(name = "BlogController", urlPatterns = {"/blogcontroller"})
+public class BlogController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -72,7 +72,7 @@ public class PostController extends HttpServlet {
             try {
                 postID = Integer.parseInt(postID_raw);
                 //Lấy và tạo 1 attribute PostDetail cụ thể để hiện thị trong trang Blog Detail
-                Post postDetail = PostDAO.getInstance().getPostByID(postID);
+                Post postDetail = BlogDAO.getInstance().getPostByID(postID);
                 request.setAttribute("postDetail", postDetail);
 
             } catch (NumberFormatException e) {
@@ -98,30 +98,30 @@ public class PostController extends HttpServlet {
         //Lấy title từ thanh search để search
         String titleSearch = request.getParameter("titleSearch");
         if (titleSearch != null && !titleSearch.isBlank()) {
-            List<Post> listPostByTitle = PostDAO.getInstance().getAllPostByTitle(titleSearch, page, BLOGS_PER_PAGE);
+            List<Post> listPostByTitle = BlogDAO.getInstance().getAllPostByTitle(titleSearch, page, BLOGS_PER_PAGE);
             //listPost này để truyền qua blog list để hiển thị
             //cả 3 trường hợp if đều dùng chung 1 cái attribute tên là listPost
             request.setAttribute("listPost", listPostByTitle);
 
             //Lấy tổng số bài post có title match với titleSearch 
             //để phục vụ cho việc phân trang
-            totalBlogs = PostDAO.getInstance().getTotalPostAfterSearch(titleSearch);
+            totalBlogs = BlogDAO.getInstance().getTotalPostAfterSearch(titleSearch);
         } else if (postCategoryID_raw != null && !postCategoryID_raw.isBlank()) {
             try {
                 postCategoryID = Integer.parseInt(postCategoryID_raw);
                 //Lấy ra List Post có postCategoryID = bằng postCategoryID đưa vô
-                List<Post> listPostByCategory = PostDAO.getInstance().getAllPostByPostCategoryID(postCategoryID, page, BLOGS_PER_PAGE);
+                List<Post> listPostByCategory = BlogDAO.getInstance().getAllPostByPostCategoryID(postCategoryID, page, BLOGS_PER_PAGE);
                 request.setAttribute("listPost", listPostByCategory);
                 //cần sửa
-                totalBlogs = PostDAO.getInstance().getTotalPostAfterFilterPostCategory(postCategoryID);
+                totalBlogs = BlogDAO.getInstance().getTotalPostAfterFilterPostCategory(postCategoryID);
 
             } catch (NumberFormatException e) {
                 System.out.println(e);
             }
         } else {
-            List<Post> listPost = PostDAO.getInstance().getAllPost(page, BLOGS_PER_PAGE);
+            List<Post> listPost = BlogDAO.getInstance().getAllPost(page, BLOGS_PER_PAGE);
             request.setAttribute("listPost", listPost);
-            totalBlogs = PostDAO.getInstance().getTotalPost();
+            totalBlogs = BlogDAO.getInstance().getTotalPost();
         }
 
         int totalPages = (int) Math.ceil((double) totalBlogs / BLOGS_PER_PAGE);
@@ -132,11 +132,11 @@ public class PostController extends HttpServlet {
         request.setAttribute("BLOGS_PER_PAGE", BLOGS_PER_PAGE);
 
         //Lấy và tạo ra attribute PostCategory
-        List<PostCategory> listPostCategory = PostDAO.getInstance().getAllPostCategory();
+        List<PostCategory> listPostCategory = BlogDAO.getInstance().getAllPostCategory();
         request.setAttribute("listPostCategory", listPostCategory);
 
         //Lấy 5 bài Post có createDate mới nhất để hiển thị
-        List<Post> listRecentPost = PostDAO.getInstance().getRecentPost();
+        List<Post> listRecentPost = BlogDAO.getInstance().getRecentPost();
         request.setAttribute("listRecentPost", listRecentPost);
 
         //Lấy page để Chọn trang nào đc forward sang

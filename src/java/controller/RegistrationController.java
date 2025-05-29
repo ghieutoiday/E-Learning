@@ -5,6 +5,7 @@
 package controller;
 
 import dal.CourseCategoryDAO;
+import dal.CourseDAO;
 import dal.RegistrationDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Course;
 import model.CourseCategory;
 import model.Registration;
 
@@ -23,8 +25,9 @@ import model.Registration;
  */
 @WebServlet(name = "RegistrationController", urlPatterns = {"/registrationcontroller"})
 public class RegistrationController extends HttpServlet {
-    
+
     CourseCategoryDAO courseCategoryDAO = new CourseCategoryDAO();
+    CourseDAO courseDAO = new CourseDAO();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -64,11 +67,41 @@ public class RegistrationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        //Đáng lẽ phải lấy userID từ session nhưng vì chưa có tính năng login
+        //nên ở đây tôi hard code giá trị userID;
+        int userID = 5;
+
+        //Lấy ra course Category để hiển thị ở thanh sider bar bên trái giúp fitler
         List<CourseCategory> listCourseCategory = courseCategoryDAO.getAllCategory();
         request.setAttribute("listCourseCategory", listCourseCategory);
-        List<Registration> listRegistration = RegistrationDAO.getInstance().getAllRegistration();
-        request.setAttribute("listRegistration", listRegistration);
+
+        String action = request.getParameter("action");
+
+        if (action != null && action.equals("filter")) {
+            //Lấy ra Course Category từ trang my-registration.jsp để lọc
+            //Nếu không có courseCategoryID truyền vô thì hiển thị toàn bộ
+            //còn nếu có thì lọc và hiển thị danh sách đó ra
+            String courseCategoryID_raw = request.getParameter("courseCategoryID");
+            int courseCategoryID;
+            try {
+                courseCategoryID = Integer.parseInt(courseCategoryID_raw);
+                List<Registration> listAllRegistrationByCourseCategoryOfUser = RegistrationDAO.getInstance().getAllRegistrationByCourseCategoryOfUser(userID, courseCategoryID);
+                request.setAttribute("listRegistration", listAllRegistrationByCourseCategoryOfUser);
+            } catch (NumberFormatException e) {
+                System.out.println(e);
+            }
+        } else if (action != null && action.equals("search")) {
+            //Lấy searchCourseName từ thẻ form bên my-registration.jsp
+            String searchCourseName = request.getParameter("searchCourseName");
+
+            List<Course> listAllRegistrationByCourseOfUserAfterSearch = courseDAO.getAllCoureByCourseName(searchCourseName);
+            List<Registration> listRegistrationByListCourseOfUser = RegistrationDAO.getInstance().getAllRegistrationByListCourseOfUser(userID, listAllRegistrationByCourseOfUserAfterSearch);
+            request.setAttribute("listRegistration", listRegistrationByListCourseOfUser);
+        } else {
+            List<Registration> listRegistrationOfUser = RegistrationDAO.getInstance().getAllRegistrationOfUserByUserID(userID);
+            request.setAttribute("listRegistration", listRegistrationOfUser);
+        }
+
         request.getRequestDispatcher("my-registrations.jsp").forward(request, response);
     }
 

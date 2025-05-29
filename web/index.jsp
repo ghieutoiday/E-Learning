@@ -108,7 +108,7 @@
                                         
                                         <!--My Course / My Registration-->
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <li><a href="my-courses.jsp" class="btn-link customer-course"><p>My Courses</p></a></li>
+                                        <li><a href="mycoursecontroller" class="btn-link customer-course"><p>My Courses</p></a></li>
                                         &nbsp;&nbsp;&nbsp;
                                         <li><a href="registrationcontroller" class="btn-link customer-registration"><p>My Registrations</p></a></li>
                                     </ul>
@@ -187,9 +187,9 @@
                                         <ul class="sub-menu">
                                             <li><a href="blog-classic-grid.jsp">Blog Classic</a></li>
                                             <li><a href="blog-classic-sidebar.jsp">Blog Classic Sidebar</a></li>
-                                            <li><a href="postcontroller?pageforward=bloglist">Blog List Sidebar</a></li>
+                                            <li><a href="blogcontroller?pageforward=bloglist">Blog List Sidebar</a></li>
                                             <li><a href="blog-standard-sidebar.jsp">Blog Standard Sidebar</a></li>
-                                            <li><a href="postcontroller?pageforward=blogdetail">Blog Details</a></li>
+                                            <li><a href="blogcontroller?pageforward=blogdetail">Blog Details</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-dashboard"><a href="javascript:;">Dashboard <i class="fa fa-chevron-down"></i></a>
