@@ -276,7 +276,7 @@
                                     <c:if test="${totalPages > 1}">
                                         <div class="pagination-bx rounded-sm gray clearfix">
                                             <ul class="pagination">
-                                                <!-- NÃºt Prev -->
+                                                <!-- Nếu đang ở trang 1, nút "Prev" bị vô hiệu hóa (không nhấn được) -->
                                                 <c:choose>
                                                     <c:when test="${currentPage == 1}">
                                                         <li class="previous disabled">
@@ -286,7 +286,7 @@
                                                         </li>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <li class="previous">
+                                                        <li class="previous">  <!-- Nếu không phải ở trang 1 thì có thể lùi -->
                                                             <a href="${pageContext.request.contextPath}/postcontroller?page=${currentPage - 1}&pageforward=bloglist&titleSearch=${param.titleSearch}">
                                                                 <i class="ti-arrow-left"></i> Prev
                                                             </a>
@@ -294,7 +294,7 @@
                                                     </c:otherwise>
                                                 </c:choose>
 
-                                                <!-- CÃ¡c trang -->
+                                                <!-- Duyệt từ trang 1 đến totalPages -->
                                                 <c:forEach begin="1" end="${totalPages}" var="i">
                                                     <li class="${currentPage == i ? 'active' : ''}">
                                                         <a href="${pageContext.request.contextPath}/postcontroller?page=${i}&pageforward=bloglist&titleSearch=${param.titleSearch}">${i}</a>
@@ -302,16 +302,16 @@
                                                 </c:forEach>
 
                                                 <!-- Nut Next -->
-                                                <c:choose>
+                                                <c:choose>   <!-- Nếu đang ở trang cuồi, nút "Next" bị vô hiệu hóa (không nhấn được) -->
                                                     <c:when test="${currentPage == totalPages}">
-                                                        <li class="next disabled">
+                                                        <li class="next disabled">  
                                                             <a href="#" onclick="return false;" style="pointer-events: none; cursor: default;">
                                                                 Next <i class="ti-arrow-right"></i>
                                                             </a>
                                                         </li>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <li class="next">
+                                                        <li class="next">  <!-- Nếu không phải ở trang cuối thì có thể tiến -->
                                                             <a href="${pageContext.request.contextPath}/postcontroller?page=${currentPage + 1}&pageforward=bloglist&titleSearch=${param.titleSearch}">
                                                                 Next <i class="ti-arrow-right"></i>
                                                             </a>

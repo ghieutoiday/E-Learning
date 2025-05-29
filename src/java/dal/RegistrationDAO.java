@@ -103,30 +103,36 @@ public class RegistrationDAO extends DBContext {
                     + "JOIN [User] u ON r.userID = u.userID "
                     + "JOIN Course c ON r.courseID = c.courseID "
                     + "JOIN PricePackage p ON r.pricePackageID = p.pricePackageID "
-                    + "LEFT JOIN [User] lu ON r.lastUpdateBy = lu.userID "
-                    + "WHERE 1=1 ");
-
+                    + "LEFT JOIN [User] lu ON r.lastUpdateBy = lu.userID " // lấy tất cả các bản ghi từ bên trái là registration phù hợp với bản ghi bên phải là user
+                    + "WHERE 1=1 "); // để có thể thêm các điều kiện khác ( AND )
+            // Danh sách các giá trị tham số sẽ truyền vào câu SQL
             List<Object> params = new ArrayList<>();
-
+            
+            // Lọc theo email người dùng nếu có
             if (emailSearch != null && !emailSearch.trim().isEmpty()) {
                 sql.append("AND LOWER(u.email) LIKE ? ");
                 params.add("%" + emailSearch.toLowerCase() + "%");
             }
+            // Lọc theo tên khóa học nếu có
             if (courseName != null && !courseName.trim().isEmpty()) {
                 sql.append("AND c.courseName = ? ");
                 params.add(courseName);
             }
+            // Lọc theo tên gói học phí nếu có
             if (name != null && !name.trim().isEmpty()) {
                 sql.append("AND p.name = ? ");
                 params.add(name);
             }
+            // Lọc theo trạng thái nếu có
             if (status != null && !status.trim().isEmpty()) {
                 sql.append("AND r.status = ? ");
                 params.add(status);
             }
 
             // Handle sorting
+            // kiểm tra xem có yêu cầu sắp xếp không
             if (sortBy != null && !sortBy.trim().isEmpty()) {
+                //Dựa vào giá trị sortBy, xác định cột thực tế trong SQL cần dùng để sắp xếp
                 String orderColumn;
                 switch (sortBy) {
                     case "userID":
@@ -160,14 +166,15 @@ public class RegistrationDAO extends DBContext {
                         orderColumn = "lu.fullName";
                         break;
                     default:
-                        orderColumn = "r.registrationID";
+                        orderColumn = "r.userID";
                 }
 
-                sql.append(" ORDER BY ").append(orderColumn).append(" ")
+                sql.append(" ORDER BY ").append(orderColumn).append(" ")  //  sắp xếp kết quả truy vấn theo yêu cầu của người dùng
                         .append("desc".equalsIgnoreCase(sortOrder) ? "DESC" : "ASC");
             }
-
+            // chuyển đối tượng StringBuilder thành chuỗi hoàn chỉnh.
             PreparedStatement ps = connection.prepareStatement(sql.toString());
+            //gán từng giá trị trong danh sách params vào các dấu ? trong câu SQL tương ứng.
             for (int i = 0; i < params.size(); i++) {
                 ps.setObject(i + 1, params.get(i));
             }
@@ -176,7 +183,7 @@ public class RegistrationDAO extends DBContext {
 
             while (rs.next()) {
                 int registrationID = rs.getInt("registrationID");
-                Registration registration = getRegistrationByRegistrationID(registrationID);
+                Registration registration = getRegistrationByRegistrationID(registrationID); //  lấy chi tiết thông tin Registration dựa vào registrationID từ hàm getRegistrationByRegistrationID() .
                 list.add(registration);
             }
 

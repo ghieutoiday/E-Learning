@@ -67,25 +67,27 @@ public class RegistrationSalerController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        
         // Lấy các tham số sắp xếp từ request
         String sortBy = request.getParameter("sortBy");
-        String sortOrder = request.getParameter("sortOrder"); // Giá trị thường là 'asc' hoặc 'desc'
+        String sortOrder = request.getParameter("sortOrder"); // là 'asc' hoặc 'desc'
 
-        // CUNG CẤP GIÁ TRỊ MẶC ĐỊNH CHO SORTBY VÀ SORTORDER NẾU CHÚNG LÀ NULL HOẶC RỖNG TỪ REQUEST
+        
+        // Nếu tham số sắp xếp là null hoặc rỗng thì mặc định sắp xếp theo userID và tăng dần
         if (sortBy == null || sortBy.trim().isEmpty()) {
-            sortBy = "userID"; // Mặc định sắp xếp theo userID
+            sortBy = "userID"; 
         }
         if (sortOrder == null || sortOrder.trim().isEmpty()) {
-            sortOrder = "asc"; // Mặc định sắp xếp tăng dần
+            sortOrder = "asc"; 
         }
-
+        
+        // Láy các tham số search, filter từ request
         String emailSearch = request.getParameter("emailSearch");
         String courseName = request.getParameter("courseName");
         String name = request.getParameter("name");
         String status = request.getParameter("status");
 
-        // Gửi lại các tham số sang JSP để giữ input
+        // Gửi lại các tham số sang JSP để hiện lại giá trị nhập
         request.setAttribute("sortBy", sortBy);
         request.setAttribute("sortOrder", sortOrder);
         request.setAttribute("emailSearch", emailSearch);
@@ -96,7 +98,7 @@ public class RegistrationSalerController extends HttpServlet {
         List<Course> courseList = new CourseDAO().getAllCourse();
         List<PricePackage> packageList = new PricePackageDAO().getAllPricePackage();
         
-        // Gọi DAO đã kết hợp để lấy danh sách đăng ký
+        // Gọi ra DAO để có thể lấy ra tất cả registration, có thể sort tăng hoặc giảm dần ở các cột, có thể lọc theo courseName, name pricepackage và status
         List<Registration> listRegistrationBySaler = RegistrationDAO.getInstance().getRegistrationsByAllFilters(emailSearch, courseName, name, status, sortBy, sortOrder);
         
         request.setAttribute("courseList", courseList);

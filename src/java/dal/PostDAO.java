@@ -45,7 +45,7 @@ public class PostDAO extends DBContext {
         String sql = " SELECT * FROM Post"
                 + " WHERE status = 'Active' "
                 + " ORDER BY updateDate DESC "
-                + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+                + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY"; // Phân trang -- bỏ qua số dòng - lấy số dòng kế tiếp
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -89,7 +89,7 @@ public class PostDAO extends DBContext {
 
         String sql = " SELECT COUNT(*)"
                    + " FROM Post"
-                   + " where status = 'Active' AND LOWER(title) LIKE LOWER(?)";
+                   + " where status = 'Active' AND LOWER(title) LIKE LOWER(?)"; //Biến toàn bộ chuỗi trong cột title và tham số truyền vào thành chữ thường, Dấu % được dùng để tìm chuỗi con
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -158,7 +158,8 @@ public class PostDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {  //Kiểm tra xem còn dữ liệu trong rs hay không
-                User owner = userDAO.getUserByID(rs.getInt(2));
+                // lấy dữ liệu từng cột 
+                User owner = userDAO.getUserByID(rs.getInt(2)); 
                 String title = rs.getString(3);
                 PostCategory postCategory = getPostCategortByID(rs.getInt(4));
                 String thumbnail = rs.getString(5);

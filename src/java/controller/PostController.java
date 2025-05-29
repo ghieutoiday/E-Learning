@@ -87,7 +87,7 @@ public class PostController extends HttpServlet {
         //Lấy và tạo attribute Post List, này để Thịnh dùng
         // Get filter parameters
         String pageStr = request.getParameter("page");
-        int page = 1;
+        int page = 1; // mặc định là trang 1
         if (pageStr != null && !pageStr.isEmpty()) {
             page = Integer.parseInt(pageStr);
         }
@@ -97,8 +97,8 @@ public class PostController extends HttpServlet {
         //Chức năng SEARCH
         //Lấy title từ thanh search để search
         String titleSearch = request.getParameter("titleSearch");
-        if (titleSearch != null && !titleSearch.isBlank()) {
-            List<Post> listPostByTitle = PostDAO.getInstance().getAllPostByTitle(titleSearch, page, BLOGS_PER_PAGE);
+        if (titleSearch != null && !titleSearch.isBlank()) { // kiểm tra xem người dùng có nhập hay không
+            List<Post> listPostByTitle = PostDAO.getInstance().getAllPostByTitle(titleSearch, page, BLOGS_PER_PAGE); 
             //listPost này để truyền qua blog list để hiển thị
             //cả 3 trường hợp if đều dùng chung 1 cái attribute tên là listPost
             request.setAttribute("listPost", listPostByTitle);
@@ -128,8 +128,7 @@ public class PostController extends HttpServlet {
 
         request.setAttribute("currentPage", page);
         request.setAttribute("totalPages", totalPages);
-        request.setAttribute("totalBlogs", totalBlogs);
-        request.setAttribute("BLOGS_PER_PAGE", BLOGS_PER_PAGE);
+
 
         //Lấy và tạo ra attribute PostCategory
         List<PostCategory> listPostCategory = PostDAO.getInstance().getAllPostCategory();
