@@ -8,6 +8,8 @@ import model.Role;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import model.User;
 
 /**
@@ -59,16 +61,62 @@ public class UserDAO extends DBContext {
                 String password = rs.getString(4);
                 String gender = rs.getString(5);
                 String mobile = rs.getString(6);
-                Role role = getRoleByID(rs.getInt(7));
-                String avatar = rs.getString(8);
-                String status = rs.getString(9);
+                String address = rs.getString(7);
+                Role role = getRoleByID(rs.getInt(8));
+                String avatar = rs.getString(9);
+                String status = rs.getString(10);
                 
                 //Lấy ra đối tượng User
-                user = new User(id, fullName, email, password, gender, mobile, role, avatar, status);
+                user = new User(id, fullName, email, password, gender, mobile, address, role, avatar, status);
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
         return user;
+    }
+
+    public User getUserByEmail(String email) {
+        String sql = "SELECT * FROM [User] WHERE email = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                User user = new User();
+                user.setUserID(rs.getInt("userID"));
+                user.setFullName(rs.getString("fullName"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                // Get role from roleID
+                int roleID = rs.getInt("roleID");
+                Role role = getRoleByID(roleID);
+                user.setRole(role);
+                return user;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in getUserByEmail: " + e.getMessage());
+        }
+        return null;
+    }
+
+    // Add getAllAuthors method
+    public List<User> getAllAuthors() {
+        List<User> authors = new ArrayList<>();
+        String sql = "SELECT DISTINCT u.* FROM [User] u " +
+                    "JOIN Post p ON u.userID = p.ownerID " +
+                    "ORDER BY u.fullName";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                User author = new User();
+                author.setUserID(rs.getInt("userID"));
+                author.setFullName(rs.getString("fullName"));
+                authors.add(author);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in getAllAuthors: " + e.getMessage());
+        }
+        return authors;
     }
 }

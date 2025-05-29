@@ -19,144 +19,43 @@ public class PostDAO extends DBContext {
     private static final String COUNT_TOTAL_POSTS = 
         "SELECT COUNT(*) FROM Post";
 
+    private UserDAO userDAO;
+    private PostCategoryDAO postCategoryDAO;
+    
     public PostDAO() {
-        // Connection is initialized in DBContext constructor
-    }
-      UserDAO userDAO = new UserDAO();
-    PostCategoryDAO postCategoryDAO = new PostCategoryDAO();
-
-    public List<Post> getPosts(int page, int postsPerPage) {
-        List<Post> posts = new ArrayList<>();
-        int offset = (page - 1) * postsPerPage;
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_POSTS_WITH_PAGINATION)) {
-            preparedStatement.setInt(1, offset);
-            preparedStatement.setInt(2, postsPerPage);
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-                Post post = new Post();
-                post.setPostID(rs.getInt("postID"));
-                post.setTitle(rs.getString("title"));
-                PostCategory category = postCategoryDAO.getCategoryByName(rs.getString("postCategoryName"));
-                post.setPostCategory(category);
-                User owner = userDAO.getUserByID(rs.getInt("ownerID"));
-                post.setOwner(owner);
-                post.setCreateDate(rs.getTimestamp("createDate"));
-                post.setStatus(rs.getString("status"));
-                post.setFeature(rs.getBoolean("feature"));
-                post.setThumbnail(rs.getString("thumbnail"));
-                posts.add(post);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return posts;
+        super();
+        this.userDAO = new UserDAO();
+        this.postCategoryDAO = new PostCategoryDAO();
     }
 
-    public int getTotalPosts() {
-        int total = 0;
-        try (PreparedStatement preparedStatement = connection.prepareStatement(COUNT_TOTAL_POSTS);
-             ResultSet rs = preparedStatement.executeQuery()) {
-
-            if (rs.next()) {
-                total = rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return total;
+    // Getters and setters for DAOs
+    public UserDAO getUserDAO() {
+        return userDAO;
     }
 
-    public List<Post> searchPosts(String search, int page, int postsPerPage) {
-        List<Post> posts = new ArrayList<>();
-        int offset = (page - 1) * postsPerPage;
-        
-        String sql = "SELECT p.postID, p.title, pc.postCategoryName, p.ownerID, u.fullName, p.createDate, p.status, p.feature, p.thumbnail " +
-                    "FROM Post p " +
-                    "JOIN PostCategory pc ON p.postCategoryID = pc.postCategoryID " +
-                    "JOIN [User] u ON p.ownerID = u.userID " +
-                    "WHERE p.title LIKE ? " +
-                    "ORDER BY p.postID " +
-                    "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
-                    
-        try (PreparedStatement st = connection.prepareStatement(sql)) {
-            st.setString(1, "%" + search + "%");
-            st.setInt(2, offset);
-            st.setInt(3, postsPerPage);
-            ResultSet rs = st.executeQuery();
-            
-            while (rs.next()) {
-                Post post = new Post();
-                post.setPostID(rs.getInt("postID"));
-                post.setTitle(rs.getString("title"));
-                PostCategory category = postCategoryDAO.getCategoryByName(rs.getString("postCategoryName"));
-                post.setPostCategory(category);
-                User owner = userDAO.getUserByID(rs.getInt("ownerID"));
-                post.setOwner(owner);
-                post.setCreateDate(rs.getTimestamp("createDate"));
-                post.setStatus(rs.getString("status"));
-                post.setFeature(rs.getBoolean("feature"));
-                post.setThumbnail(rs.getString("thumbnail"));
-                posts.add(post);
-            }
-        } catch (SQLException e) {
-            System.out.println("Error in searchPosts: " + e.getMessage());
-        }
-        return posts;
-    }
-    
-    public int getTotalSearchPosts(String search) {
-        String sql = "SELECT COUNT(*) FROM Post p " +
-                    "WHERE p.title LIKE ?";
-        try (PreparedStatement st = connection.prepareStatement(sql)) {
-            st.setString(1, "%" + search + "%");
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            System.out.println("Error in getTotalSearchPosts: " + e.getMessage());
-        }
-        return 0;
+    public void setUserDAO(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
+    public PostCategoryDAO getPostCategoryDAO() {
+        return postCategoryDAO;
+    }
+
+    public void setPostCategoryDAO(PostCategoryDAO postCategoryDAO) {
+        this.postCategoryDAO = postCategoryDAO;
+    }
+
+    // Getter for all categories
     public List<PostCategory> getAllCategories() {
-        List<PostCategory> categories = new ArrayList<>();
-        String sql = "SELECT * FROM PostCategory ORDER BY postCategoryName";
-        try (PreparedStatement st = connection.prepareStatement(sql)) {
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                PostCategory category = new PostCategory();
-                category.setPostCategoryID(rs.getInt("postCategoryID"));
-                category.setPostCategoryName(rs.getString("postCategoryName"));
-                categories.add(category);
-            }
-        } catch (SQLException e) {
-            System.out.println("Error in getAllCategories: " + e.getMessage());
-        }
-        return categories;
+        return postCategoryDAO.getAllPostCategories();
     }
-    
+
+    // Getter for all authors
     public List<User> getAllAuthors() {
-        List<User> authors = new ArrayList<>();
-        String sql = "SELECT DISTINCT u.* FROM [User] u " +
-                    "JOIN Post p ON u.userID = p.ownerID " +
-                    "ORDER BY u.fullName";
-        try (PreparedStatement st = connection.prepareStatement(sql)) {
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                User author = new User();
-                author.setUserID(rs.getInt("userID"));
-                author.setFullName(rs.getString("fullName"));
-                authors.add(author);
-            }
-        } catch (SQLException e) {
-            System.out.println("Error in getAllAuthors: " + e.getMessage());
-        }
-        return authors;
+        return userDAO.getAllAuthors();
     }
-    
+
+    // Modified methods to work with JSTL
     public List<Post> getFilteredPosts(String search, String sortBy, String category, 
             String author, String dateFilter, String status, String feature, 
             int page, int postsPerPage) {
@@ -260,10 +159,18 @@ public class PostDAO extends DBContext {
                 Post post = new Post();
                 post.setPostID(rs.getInt("postID"));
                 post.setTitle(rs.getString("title"));
-                PostCategory postCategory = postCategoryDAO.getCategoryByName(rs.getString("postCategoryName"));
+                
+                // Set category
+                PostCategory postCategory = new PostCategory();
+                postCategory.setPostCategoryName(rs.getString("postCategoryName"));
                 post.setPostCategory(postCategory);
-                User owner = userDAO.getUserByID(rs.getInt("ownerID"));
+                
+                // Set owner
+                User owner = new User();
+                owner.setUserID(rs.getInt("ownerID"));
+                owner.setFullName(rs.getString("fullName"));
                 post.setOwner(owner);
+                
                 post.setCreateDate(rs.getTimestamp("createDate"));
                 post.setStatus(rs.getString("status"));
                 post.setFeature(rs.getBoolean("feature"));
@@ -275,7 +182,114 @@ public class PostDAO extends DBContext {
         }
         return posts;
     }
+
+    // Trả về danh sách bài viết theo phân trang
+    public List<Post> getPosts(int page, int postsPerPage) {
+        List<Post> posts = new ArrayList<>();
+        int offset = (page - 1) * postsPerPage;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SELECT_POSTS_WITH_PAGINATION)) {
+            preparedStatement.setInt(1, offset);
+            preparedStatement.setInt(2, postsPerPage);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Post post = new Post();
+                post.setPostID(rs.getInt("postID"));
+                post.setTitle(rs.getString("title"));
+                
+                // Set category
+                PostCategory category = new PostCategory();
+                category.setPostCategoryName(rs.getString("postCategoryName"));
+                post.setPostCategory(category);
+                
+                // Set owner
+                User owner = new User();
+                owner.setUserID(rs.getInt("ownerID"));
+                owner.setFullName(rs.getString("fullName"));
+                post.setOwner(owner);
+                
+                post.setCreateDate(rs.getTimestamp("createDate"));
+                post.setStatus(rs.getString("status"));
+                post.setFeature(rs.getBoolean("feature"));
+                post.setThumbnail(rs.getString("thumbnail"));
+                posts.add(post);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return posts;
+    }
     
+    // Trả về tổng số bài viết trong bảng Post
+    public int getTotalPosts() {
+        int total = 0;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(COUNT_TOTAL_POSTS);
+             ResultSet rs = preparedStatement.executeQuery()) {
+
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
+    //Tìm kiếm bài viết theo từ khóa, đồng thời có phân trang.
+    public List<Post> searchPosts(String search, int page, int postsPerPage) {
+        List<Post> posts = new ArrayList<>();
+        int offset = (page - 1) * postsPerPage;
+        
+        String sql = "SELECT p.postID, p.title, pc.postCategoryName, p.ownerID, u.fullName, p.createDate, p.status, p.feature, p.thumbnail " +
+                    "FROM Post p " +
+                    "JOIN PostCategory pc ON p.postCategoryID = pc.postCategoryID " +
+                    "JOIN [User] u ON p.ownerID = u.userID " +
+                    "WHERE p.title LIKE ? " +
+                    "ORDER BY p.postID " +
+                    "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+                    
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, "%" + search + "%");
+            st.setInt(2, offset);
+            st.setInt(3, postsPerPage);
+            ResultSet rs = st.executeQuery();
+            
+            while (rs.next()) {
+                Post post = new Post();
+                post.setPostID(rs.getInt("postID"));
+                post.setTitle(rs.getString("title"));
+                PostCategory category = postCategoryDAO.getCategoryByName(rs.getString("postCategoryName"));
+                post.setPostCategory(category);
+                User owner = userDAO.getUserByID(rs.getInt("ownerID"));
+                post.setOwner(owner);
+                post.setCreateDate(rs.getTimestamp("createDate"));
+                post.setStatus(rs.getString("status"));
+                post.setFeature(rs.getBoolean("feature"));
+                post.setThumbnail(rs.getString("thumbnail"));
+                posts.add(post);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in searchPosts: " + e.getMessage());
+        }
+        return posts;
+    }
+    //Trả về tổng số bài viết có tiêu đề chứa từ khóa tìm kiếm.
+    public int getTotalSearchPosts(String search) {
+        String sql = "SELECT COUNT(*) FROM Post p " +
+                    "WHERE p.title LIKE ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
+            st.setString(1, "%" + search + "%");
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in getTotalSearchPosts: " + e.getMessage());
+        }
+        return 0;
+    }
+    //Lấy danh sách bài viết có lọc theo tiêu chí (tìm kiếm, phân loại, tác giả, 
+    //thời gian, trạng thái, nổi bật) và phân trang.
     public int getTotalFilteredPosts(String search, String category, 
             String author, String dateFilter, String status, String feature) {
         StringBuilder sql = new StringBuilder(
@@ -344,21 +358,19 @@ public class PostDAO extends DBContext {
         }
         return 0;
     }
-
+    //Thêm mới bài viết vào database
     public boolean addPost(Post post) {
-        String sql = "INSERT INTO Post (title, postCategoryID, ownerID, thumbnail, briefInfo, description, status, feature, createDate, updateDate) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Post (title, briefInfo, description, thumbnail, postCategoryID, ownerID, status, feature, createDate) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, GETDATE())";
         try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setString(1, post.getTitle());
-            st.setInt(2, post.getPostCategory().getPostCategoryID());
-            st.setInt(3, post.getOwner().getUserID());
+            st.setString(2, post.getBriefInfo());
+            st.setString(3, post.getDescription());
             st.setString(4, post.getThumbnail());
-            st.setString(5, post.getBriefInfo());
-            st.setString(6, post.getDescription());
+            st.setInt(5, post.getPostCategory().getPostCategoryID());
+            st.setInt(6, post.getOwner().getUserID());
             st.setString(7, post.getStatus());
             st.setBoolean(8, post.isFeature());
-            st.setTimestamp(9, new java.sql.Timestamp(post.getCreateDate().getTime()));
-            st.setTimestamp(10, new java.sql.Timestamp(post.getUpdateDate().getTime()));
             
             return st.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -366,9 +378,9 @@ public class PostDAO extends DBContext {
             return false;
         }
     }
-
+    //Lấy chi tiết 1 bài Post theo PostID
     public Post getPostByID(int postID) {
-        String sql = "SELECT p.*, pc.postCategoryName, u.fullName " +
+        String sql = "SELECT p.*, pc.postCategoryName, u.fullName, u.userID " +
                     "FROM Post p " +
                     "JOIN PostCategory pc ON p.postCategoryID = pc.postCategoryID " +
                     "JOIN [User] u ON p.ownerID = u.userID " +
@@ -396,7 +408,7 @@ public class PostDAO extends DBContext {
                 
                 // Set owner
                 User owner = new User();
-                owner.setUserID(rs.getInt("ownerID"));
+                owner.setUserID(rs.getInt("userID"));
                 owner.setFullName(rs.getString("fullName"));
                 post.setOwner(owner);
                 
@@ -407,7 +419,7 @@ public class PostDAO extends DBContext {
         }
         return null;
     }
-
+    //xóa 1 bài viết 
     public boolean deletePost(int postID) {
         String sql = "DELETE FROM Post WHERE postID = ?";
         try (PreparedStatement st = connection.prepareStatement(sql)) {
@@ -416,6 +428,26 @@ public class PostDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println("Error in deletePost: " + e.getMessage());
             return false;
+        }
+    }
+    
+       
+    public void updatePost(Post post) {
+        String sql = "UPDATE Post SET title = ?, briefInfo = ?, description = ?, thumbnail = ?, "
+                + "postCategoryID = ?, status = ?, feature = ?, updateDate = GETDATE() WHERE postID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, post.getTitle());
+            st.setString(2, post.getBriefInfo());
+            st.setString(3, post.getDescription());
+            st.setString(4, post.getThumbnail());
+            st.setInt(5, post.getPostCategory().getPostCategoryID());
+            st.setString(6, post.getStatus());
+            st.setBoolean(7, post.isFeature());
+            st.setInt(8, post.getPostID());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error in updatePost: " + e.getMessage());
         }
     }
 }

@@ -102,10 +102,10 @@
                                         <li><a href="javascript:;" class="btn-link"><i class="fa fa-facebook"></i></a></li>
                                         <li><a href="javascript:;" class="btn-link"><i class="fa fa-google-plus"></i></a></li>
                                         <li><a href="javascript:;" class="btn-link"><i class="fa fa-linkedin"></i></a></li>
-                                        
+
                                         <!-- Search Button ==== -->
                                         <li class="search-btn"><button id="quik-search-btn" type="button" class="btn-link"><i class="fa fa-search"></i></button></li>
-                                        
+
                                         <!--My Course / My Registration-->
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <li><a href="my-courses.jsp" class="btn-link customer-course"><p>My Courses</p></a></li>
@@ -187,9 +187,9 @@
                                         <ul class="sub-menu">
                                             <li><a href="blog-classic-grid.jsp">Blog Classic</a></li>
                                             <li><a href="blog-classic-sidebar.jsp">Blog Classic Sidebar</a></li>
-                                            <li><a href="blog-list-sidebar.jsp">Blog List Sidebar</a></li>
+                                            <li><a href="blogcontroller?pageforward=bloglist">Blog List Sidebar</a></li>
                                             <li><a href="blog-standard-sidebar.jsp">Blog Standard Sidebar</a></li>
-                                            <li><a href="blog-details.jsp">Blog Details</a></li>
+                                            <li><a href="blogcontroller?pageforward=blogdetail">Blog Details</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-dashboard"><a href="javascript:;">Dashboard <i class="fa fa-chevron-down"></i></a>
@@ -217,13 +217,13 @@
                                         </ul>
                                     </li>
                                 </ul>
-                                
-<!--                            Này ch? là hi?n th? trên thanh nav-bar khi ? ch? ?? mobile (ko quan tr?ng)    
-                                    <div class="nav-social-link">
-                                    <a href="javascript:;"><i class="fa fa-facebook"></i></a>
-                                    <a href="javascript:;"><i class="fa fa-google-plus"></i></a>
-                                    <a href="javascript:;"><i class="fa fa-linkedin"></i></a>
-                                    </div>-->
+
+                                <!--                            Này ch? là hi?n th? trên thanh nav-bar khi ? ch? ?? mobile (ko quan tr?ng)    
+                                                                    <div class="nav-social-link">
+                                                                    <a href="javascript:;"><i class="fa fa-facebook"></i></a>
+                                                                    <a href="javascript:;"><i class="fa fa-google-plus"></i></a>
+                                                                    <a href="javascript:;"><i class="fa fa-linkedin"></i></a>
+                                                                    </div>-->
                             </div>
                             <!-- Navigation Menu END ==== -->
                         </div>

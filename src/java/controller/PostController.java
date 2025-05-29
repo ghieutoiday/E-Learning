@@ -17,6 +17,7 @@ import java.io.File;
 import java.util.Date;
 import jakarta.servlet.http.Part;
 import dal.PostCategoryDAO;
+import jakarta.servlet.annotation.WebServlet;
 import model.PostCategory;
 import jakarta.servlet.http.HttpSession;
 import model.User;
@@ -25,6 +26,7 @@ import model.User;
  *
  * @author toans
  */
+@WebServlet(name = "PostController", urlPatterns = {"/postcontroller"})
 public class PostController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private PostDAO postDAO= new PostDAO();
@@ -99,7 +101,7 @@ public class PostController extends HttpServlet {
                      
                      if (success) {
                          // Redirect to posts list on success
-                         response.sendRedirect("PostController");
+                         response.sendRedirect("postslist.jsp");
                          return;
                      } else {
                          // Handle error
@@ -136,7 +138,7 @@ public class PostController extends HttpServlet {
                      }
                  }
                  // If post not found or invalid ID, redirect to posts list
-                 response.sendRedirect("PostController");
+                 response.sendRedirect("postslist.jsp");
                  return;
              }
              
@@ -147,7 +149,7 @@ public class PostController extends HttpServlet {
                      boolean success = postDAO.deletePost(Integer.parseInt(postId));
                      if (success) {
                          // Redirect to posts list on success
-                         response.sendRedirect("PostController");
+                         response.sendRedirect("postslist.jsp");
                          return;
                      } else {
                          // Handle error
@@ -157,7 +159,7 @@ public class PostController extends HttpServlet {
                      }
                  }
                  // If no post ID provided, redirect to posts list
-                 response.sendRedirect("PostController");
+                 response.sendRedirect("postslist.jsp");
                  return;
              }
              
@@ -200,7 +202,8 @@ public class PostController extends HttpServlet {
              request.setAttribute("feature", feature);
              request.setAttribute("checkNull", totalPages);
              
-             request.getRequestDispatcher("admin/postslist.jsp").forward(request, response);
+             // Forward to JSP
+             request.getRequestDispatcher("/admin/postslist.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
