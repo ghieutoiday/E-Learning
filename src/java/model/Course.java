@@ -19,10 +19,38 @@ public class Course {
     private User owner;
     private String status;
     private int numberOfLesson;
+    private int feature;
     private Date createDate;
 
     public Course() {
     }
+
+    public Course(int courseID, String courseName, CourseCategory courseCategory, String description, User owner, String status, int numberOfLesson, int feature, Date createDate) {
+        this.courseID = courseID;
+        this.courseName = courseName;
+        this.courseCategory = courseCategory;
+        this.description = description;
+        this.owner = owner;
+        this.status = status;
+        this.numberOfLesson = numberOfLesson;
+        this.feature = feature;
+        this.createDate = createDate;
+    }
+    
+    
+
+    public Course(int courseID, String courseName, CourseCategory courseCategory, String description, User owner, String status, int numberOfLesson, Date createDate) {
+        this.courseID = courseID;
+        this.courseName = courseName;
+        this.courseCategory = courseCategory;
+        this.description = description;
+        this.owner = owner;
+        this.status = status;
+        this.numberOfLesson = numberOfLesson;
+        this.createDate = createDate;
+    }
+    
+    
 
     public Course(int courseID, String courseName, CourseCategory courseCategory, String thumbnail, String description, User owner, String status, int numberOfLesson, Date createDate) {
         this.courseID = courseID;
@@ -35,6 +63,28 @@ public class Course {
         this.numberOfLesson = numberOfLesson;
         this.createDate = createDate;
     }
+
+    public Course(int courseID, String courseName, CourseCategory courseCategory, String thumbnail, String description, User owner, String status, int numberOfLesson, int feature, Date createDate) {
+        this.courseID = courseID;
+        this.courseName = courseName;
+        this.courseCategory = courseCategory;
+        this.thumbnail = thumbnail;
+        this.description = description;
+        this.owner = owner;
+        this.status = status;
+        this.numberOfLesson = numberOfLesson;
+        this.feature = feature;
+        this.createDate = createDate;
+    }
+
+    public int getFeature() {
+        return feature;
+    }
+
+    public void setFeature(int feature) {
+        this.feature = feature;
+    }
+    
 
     public int getCourseID() {
         return courseID;

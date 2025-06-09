@@ -92,7 +92,8 @@ public class CourseCategoryDAO extends DBContext{
     public static void main(String[] args) {
         CourseCategoryDAO cd = new CourseCategoryDAO();
         CourseCategory c = cd.getCategoryByName("Web Development");
-        System.out.println(c.getCourseCategory());
+//        System.out.println(c.getCourseCategory());
     }
+    
     
 }

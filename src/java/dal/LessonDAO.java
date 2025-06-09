@@ -117,4 +117,5 @@ public class LessonDAO extends DBContext {
     public static void main(String[] args) {
         System.out.println(LessonDAO.getInstance().getTotalNumberOfCompletedLessonInCourse(5,4));
     }
+    
 }

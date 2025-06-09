@@ -73,9 +73,9 @@ public class RegistrationSalerController extends HttpServlet {
         String sortOrder = request.getParameter("sortOrder"); // là 'asc' hoặc 'desc'
 
         
-        // Nếu tham số sắp xếp là null hoặc rỗng thì mặc định sắp xếp theo userID và tăng dần
+        // Nếu tham số sắp xếp là null hoặc rỗng thì mặc định sắp xếp theo registrationID và tăng dần
         if (sortBy == null || sortBy.trim().isEmpty()) {
-            sortBy = "userID"; 
+            sortBy = "registrationID"; 
         }
         if (sortOrder == null || sortOrder.trim().isEmpty()) {
             sortOrder = "asc"; 
