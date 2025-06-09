@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
 <!DOCTYPE html>
 
@@ -30,7 +28,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath()%>/admin/assets/images/favicon.png" />
 
         <!-- PAGE TITLE HERE ============================================= -->
-        <title>Posts List</title>
+        <title>Sliders List</title>
 
         <!-- MOBILE SPECIFIC ============================================= -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -65,7 +63,7 @@
                 padding: 0;
             }
 
-            /* Container ch?nh */
+            /* Container chính */
             .container-fluid {
                 padding: 20px;
             }
@@ -89,7 +87,7 @@
 
             .search-input {
                 flex: 1;
-                min-width: 365%; /* ? Search d?i ra */
+                min-width: 365%;
                 padding: 6px 12px;
                 font-size: 14px;
             }
@@ -100,17 +98,12 @@
                 font-size: 14px;
                 background-color: #f8c61b;
                 margin-left: 20px;
-
-
-
             }
 
             .sort-select {
                 width: 100px;
                 padding: 6px 14px;
                 font-size: 14px;
-
-
             }
 
             .sort-by-select {
@@ -118,12 +111,10 @@
                 text-align: center;
             }
 
-
-            /* B? l?c */
+            /* Bộ lọc */
             .filters {
                 display: flex;
                 gap: 70px;
-
             }
 
             .filters select {
@@ -137,16 +128,11 @@
                 text-align: center;
                 margin-left: 10px;
                 width: 150px;
-
             }
+
             .filters select option {
                 text-align: left;
-
             }
-
-
-
-
 
             .filters button {
                 white-space: nowrap;
@@ -155,10 +141,7 @@
                 background-color: #f8c61b;
                 margin-left: 15px;
                 gap: 20px;
-
             }
-
-
 
             table {
                 width: 100%;
@@ -191,7 +174,7 @@
                 border-radius: 4px;
             }
 
-            /* Tr?ng th?i Active/Inactive */
+            /* Trạng thái Active/Inactive */
             .status {
                 display: inline-flex;
                 align-items: center;
@@ -213,9 +196,8 @@
                 background-color: #dc3545;
             }
 
-            /* N?t h?nh ??ng */
+            /* Nút hành động */
             .action-buttons a {
-
                 text-decoration: none;
                 color: #007bff;
                 font-size: 14px;
@@ -226,7 +208,7 @@
                 text-decoration: underline;
             }
 
-            /* Ph?n trang */
+            /* Phân trang */
             .pagination {
                 display: flex;
                 justify-content: center;
@@ -257,28 +239,30 @@
             .pagination a:hover {
                 background-color: #f0f0f0;
             }
-            .select  {
+
+            .select {
                 display: block;
             }
-            .option{
+
+            .option {
                 display: block;
             }
-            .add-post-btn{
+
+            .add-slider-btn {
                 margin-left: 915px;
             }
-            .reset{
+
+            .reset {
                 padding-left: 7px;
                 padding-right: 8px;
-
             }
-            .search{
+
+            .search {
                 padding-left: 25px;
                 padding-right: 20px;
                 margin-left: 20px;
             }
-            .action{
 
-            }
             .search-container {
                 display: flex;
                 align-items: center;
@@ -303,12 +287,10 @@
                 min-width: 150px;
             }
 
-            .btn-add-post {
+            .btn-add-slider {
                 white-space: nowrap;
                 margin-right: 10px;
             }
-           
-
         </style>
     </head>
     <body class="ttr-opened-sidebar ttr-pinned-sidebar">
@@ -327,9 +309,9 @@
                     <div>
                         <a href="index.jsp" class="ttr-logo">
                             <img alt="" class="ttr-logo-mobile"
-                                src="assets/images/logo-mobile.png" width="30" height="30">
+                                 src="assets/images/logo-mobile.png" width="30" height="30">
                             <img alt="" class="ttr-logo-desktop"
-                                src="assets/images/logo-white.png" width="160" height="27">
+                                 src="assets/images/logo-white.png" width="160" height="27">
                         </a>
                     </div>
                 </div>
@@ -339,14 +321,14 @@
                     <ul class="ttr-header-navigation">
                         <li>
                             <a href="home"
-                                class="ttr-material-button ttr-submenu-toggle">HOME</a>
+                               class="ttr-material-button ttr-submenu-toggle">HOME</a>
                         </li>
                         <li>
                             <a href="#" class="ttr-material-button ttr-submenu-toggle">QUICK
                                 MENU <i class="fa fa-angle-down"></i></a>
                             <div class="ttr-header-submenu">
                                 <ul>
-                                    <li><a href="home">Our Posts List</a></li>
+                                    <li><a href="home">Our Sliders List</a></li>
                                     <li><a href="event.jsp">New Event</a></li>
                                     <li><a href="membership.jsp">Membership</a></li>
                                 </ul>
@@ -441,8 +423,8 @@
                         <li>
                             <a href="#" class="ttr-material-button ttr-submenu-toggle"><span
                                     class="ttr-user-avatar"><img alt=""
-                                        src="assets/images/testimonials/pic3.jpg" width="32"
-                                        height="32"></span></a>
+                                                             src="assets/images/testimonials/pic3.jpg" width="32"
+                                                             height="32"></span></a>
                             <div class="ttr-header-submenu">
                                 <ul>
                                     <li><a href="user-profile.jsp">My profile</a></li>
@@ -490,7 +472,7 @@
                     <form class="ttr-search-form">
                         <div class="ttr-search-input-wrapper">
                             <input type="text" name="qq" placeholder="search something..."
-                                class="ttr-search-input">
+                                   class="ttr-search-input">
                             <button type="submit" name="search" class="ttr-search-submit"><i
                                     class="ti-arrow-right"></i></button>
                         </div>
@@ -615,159 +597,142 @@
 
         <!-- Main container -->
         <main class="ttr-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12 m-b30">
-                    <div class="widget-box">
-                        <div class="wc-title">
-                            <div class="db-breadcrumb">
-                                <h4 class="breadcrumb-title" style="font-size: 24px;">Posts List</h4>
-                                <ul class="db-breadcrumb-list">
-                                    <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
-                                    <li>Posts List</li>
-                                </ul>
-                            </div>
-                            <div class="top-bar">
-                                <div class="search-container">
-                                    <form action="postcontroller" method="GET" class="d-flex">
-                                        <input type="text" name="search" value="${param.search}" placeholder="Search by title..." class="search-input" />
-                                        <input type="hidden" name="page" value="1" />
-                                        <button type="submit" class="btn btn-warning search">Search</button>
-                                    </form>
-                                    <a href="postcontroller?action=showAddForm" class="btn btn-warning btn-add-post">Add Post</a>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 m-b30">
+                        <div class="widget-box">
+                            <div class="wc-title">
+                                <div class="db-breadcrumb">
+                                    <h4 class="breadcrumb-title" style="font-size: 24px;">Sliders List</h4>
+                                    <ul class="db-breadcrumb-list">
+                                        <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                                        <li>Sliders List</li>
+                                    </ul>
                                 </div>
-                            </div>
 
-                            <!-- Filters -->
-                            <div class="filters">
-                                <form action="postcontroller" method="GET" class="d-flex align-items-center text-black" style="color: black;">
-                                    <select name="sortBy" class="sort-select">
-                                        <option value="" disabled selected hidden>Sort by</option>
-                                        <option style="color: black;" value="title" ${param.sortBy eq 'title' ? 'selected' : ''}>Title</option>
-                                        <option value="category" ${param.sortBy eq 'category' ? 'selected' : ''}>Category</option>
-                                        <option value="author" ${param.sortBy eq 'author' ? 'selected' : ''}>Author</option>
-                                        <option value="date" ${param.sortBy eq 'date' ? 'selected' : ''}>Date</option>
-                                        <option value="status" ${param.sortBy eq 'status' ? 'selected' : ''}>Status</option>
-                                        <option value="feature" ${param.sortBy eq 'feature' ? 'selected' : ''}>Feature</option>
-                                    </select>
+                                <form action="slidercontroller" method="GET" class="d-flex flex-wrap align-items-center" style="color: black;">
+                                    <input type="hidden" name="action" value="list" />
 
-                                    <select name="category" class="sort-select">
-                                        <option value="" disabled selected hidden>Category</option>
-                                        <c:forEach var="category" items="${categories}">
-                                            <option value="${category.postCategoryID}" ${param.category eq category.postCategoryID ? 'selected' : ''}>
-                                                ${category.postCategoryName}
-                                            </option>
-                                        </c:forEach>
-                                    </select>
+                                    <div class="top-bar" style="width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 10px; flex-wrap: nowrap; margin-bottom: 15px; padding-top: 0px;">
+                                        <input type="text" name="search" value="${param.search}" placeholder="Search by Title or Backlink..." class="search-input flex-grow-1" style="min-width: 300px; padding: 8px;" />
+                                        <button type="submit" class="btn btn-warning search">Filter</button>
+                                    </div>
 
-                                    <select name="author" class="sort-select">
-                                        <option value="" disabled selected hidden>Author</option>
-                                        <c:forEach var="author" items="${authors}">
-                                            <option value="${author.userID}" ${param.author eq author.userID ? 'selected' : ''}>
-                                                ${author.fullName}
-                                            </option>
-                                        </c:forEach>
-                                    </select>
+                                    <div class="filters" style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center; margin-bottom: 20px; width: 100%;">
+                                        <div class="d-flex align-items-center">
+                                            <span>Number per page:</span>
+                                            <input type="number" name="rowsPerPage" value="${param.rowsPerPage != null ? param.rowsPerPage : 5}" min="1" class="form-control" style="width: 80px; margin-left: 10px; padding: 6px;" />
+                                        </div>
 
-                                    <select name="status" class="sort-select">
-                                        <option value="" disabled selected hidden>Status</option>
-                                        <option value="active" ${param.status eq 'active' ? 'selected' : ''}>Active</option>
-                                        <option value="inactive" ${param.status eq 'inactive' ? 'selected' : ''}>Inactive</option>
-                                    </select>
+                                        <div class="d-flex align-items-center">
+                                            <span>Column to hide:</span>
+                                            <label style="margin-left: 15px;"><input type="checkbox" name="hideID" value="true" ${param.hideID == 'true' ? 'checked' : ''}> ID</label>
+                                            <label style="margin-left: 15px;"><input type="checkbox" name="hideTitle" value="true" ${param.hideTitle == 'true' ? 'checked' : ''}> Title</label>
+                                            <label style="margin-left: 15px;"><input type="checkbox" name="hideBacklink" value="true" ${param.hideBacklink == 'true' ? 'checked' : ''}> Backlink</label>
+                                            <label style="margin-left: 15px;"><input type="checkbox" name="hideStatus" value="true" ${param.hideStatus == 'true' ? 'checked' : ''}> Status</label>
+                                        </div>
 
-                                    <select name="feature" class="sort-select">
-                                        <option value="" disabled selected hidden>Feature</option>
-                                        <option value="true" ${param.feature eq 'true' ? 'selected' : ''}>Yes</option>
-                                        <option value="false" ${param.feature eq 'false' ? 'selected' : ''}>No</option>
-                                    </select>
+                                        
 
-                                    <input type="hidden" name="page" value="1" />
-                                    <input type="hidden" name="search" value="${param.search}" />
-                                    <button type="submit" class="btn btn-warning">Apply Filters</button>
-                                    <a href="postcontroller" class="btn btn-warning reset">Reset Filters</a>
+                                        <select name="status" class="sort-select">
+                                            <option value="" disabled selected hidden>Status</option>
+                                            <option value="Active" ${param.status eq 'Active' ? 'selected' : ''}>Active</option>
+                                            <option value="Inactive" ${param.status eq 'Inactive' ? 'selected' : ''}>Inactive</option>
+                                        </select>
+
+                                        <input type="hidden" name="page" value="1" />
+                                        <button type="submit" class="btn btn-warning">Apply Filters</button>
+                                        <a href="slidercontroller" class="btn btn-warning reset">Reset Filters</a>
+                                    </div>
                                 </form>
                             </div>
-                        </div>
 
-                        <div class="widget-inner">
-                            <div class="card-courses-list admin-courses">
-                                <table border="1">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Thumbnail</th>
-                                            <th>Title</th>
-                                            <th>Category</th>
-                                            <th>Owner</th>
-                                            <th>Create Date</th> 
-                                            <th>Status</th>
-                                            <th>Feature</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="post" items="${posts}" varStatus="loop">
-                                            <tr> 
-                                                <td>${post.postID}</td>
-                                                <td><img src="${post.thumbnail}" alt="Thumbnail" style="width: 50px; height: 50px; object-fit: cover;"></td>
-                                                <td>${post.title}</td>
-                                                <td>${post.postCategory.postCategoryName}</td>
-                                                <td>${post.owner.fullName}</td>
-                                                <td><fmt:formatDate value="${post.createDate}" pattern="dd/MM/yyyy"/></td> 
-                                                <td>
-                                                    <span class="status">
-                                                        <span class="dot ${post.status eq 'Active' ? 'active' : 'inactive'}"></span>
-                                                        ${post.status}
-                                                    </span>
-                                                </td>
-                                                <td>${post.feature ? 'Yes' : 'No'}</td>
-                                                <td class="action-buttons">
-                                                    <a href="postcontroller?action=view&id=${post.postID}">View</a>
-                                                    <a href="postcontroller?action=showEditForm&id=${post.postID}">Edit</a>
-                                                    <a href="postcontroller?action=delete&id=${post.postID}" onclick="return confirm('Are you sure you want to delete this post?')">Delete</a>
-                                                </td>
-                                            </tr>
+                            <div class="widget-inner">
+                                <div class="card-courses-list admin-courses">
+                                    <table border="1">
+                                        <thead>
+                                            <tr>
+                                                <c:if test="${param.hideID != 'true'}"><th>ID</th></c:if>
+                                                    <th>Image</th>
+                                                <c:if test="${param.hideTitle != 'true'}"><th>Title</th></c:if>
+                                                <c:if test="${param.hideBacklink != 'true'}"><th>Backlink</th></c:if>
+                                                <c:if test="${param.hideStatus != 'true'}"><th>Status</th></c:if>
+                                                    <!-- <th>Notes</th> -->
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach var="slider" items="${sliders}" varStatus="loop">
+                                                <tr>
+                                                    <c:if test="${param.hideID != 'true'}"><td>${slider.sliderID}</td></c:if>
+                                                    <td><img src="${slider.image}" alt="Slider Image" style="width: 50px; height: 50px; object-fit: cover;"></td>
+                                                    <c:if test="${param.hideTitle != 'true'}"><td>${slider.title}</td></c:if>
+                                                    <c:if test="${param.hideBacklink != 'true'}"><td>${slider.backlink}</td></c:if>
+                                                    <c:if test="${param.hideStatus != 'true'}">
+                                                        <td>
+                                                            <span class="status">
+                                                                <span class="dot ${slider.status eq 'Active' ? 'active' : 'inactive'}"></span>
+                                                                ${slider.status}
+                                                            </span>
+                                                        </td>
+                                                    </c:if>
+                                                    <!-- <td>${slider.notes}</td> -->
+                                                    <td class="action-buttons">
+                                                        <a href="slidercontroller?action=view&id=${slider.sliderID}">View</a>
+                                                        <a href="slidercontroller?action=showEditForm&id=${slider.sliderID}">Edit</a>
+                                                        <a href="slidercontroller?action=toggleStatus&id=${slider.sliderID}">${slider.status eq 'Active' ? 'Hide' : 'Show'}</a>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Pagination -->
+                                <div class="pagination-bx rounded-sm gray clearfix">
+                                    <ul class="pagination">
+                                        <c:set var="baseQuery" value="action=list" />
+                                        <c:if test="${not empty param.search}"><c:set var="baseQuery" value="${baseQuery}&search=${param.search}" /></c:if>
+                                        <c:if test="${not empty param.sortBy}"><c:set var="baseQuery" value="${baseQuery}&sortBy=${param.sortBy}" /></c:if>
+                                        <c:if test="${not empty param.status}"><c:set var="baseQuery" value="${baseQuery}&status=${param.status}" /></c:if>
+                                        <c:if test="${not empty param.rowsPerPage}"><c:set var="baseQuery" value="${baseQuery}&rowsPerPage=${param.rowsPerPage}" /></c:if>
+                                        <c:if test="${param.hideID == 'true'}"><c:set var="baseQuery" value="${baseQuery}&hideID=true" /></c:if>
+                                        <c:if test="${param.hideTitle == 'true'}"><c:set var="baseQuery" value="${baseQuery}&hideTitle=true" /></c:if>
+                                        <c:if test="${param.hideBacklink == 'true'}"><c:set var="baseQuery" value="${baseQuery}&hideBacklink=true" /></c:if>
+                                        <c:if test="${param.hideStatus == 'true'}"><c:set var="baseQuery" value="${baseQuery}&hideStatus=true" /></c:if>
+
+                                        <c:if test="${currentPage > 1}">
+                                            <li class="previous">
+                                                <a href="slidercontroller?${baseQuery}&page=${currentPage - 1}">
+                                                    <i class="ti-arrow-left"></i> Prev
+                                                </a>
+                                            </li>
+                                        </c:if>
+
+                                        <c:forEach begin="1" end="${totalPages}" var="i">
+                                            <li class="${currentPage == i ? 'active' : ''}">
+                                                <a href="slidercontroller?${baseQuery}&page=${i}">${i}</a>
+                                            </li>
                                         </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
 
-                            <!-- Pagination -->
-                            <div class="pagination-bx rounded-sm gray clearfix">
-                                <ul class="pagination">
-                                    <c:if test="${currentPage > 1}">
-                                        <li class="previous">
-                                            <a href="postcontroller?page=${currentPage - 1}${not empty param.search ? '&search='.concat(param.search) : ''}${not empty param.sortBy ? '&sortBy='.concat(param.sortBy) : ''}${not empty param.category ? '&category='.concat(param.category) : ''}${not empty param.author ? '&author='.concat(param.author) : ''}${not empty param.status ? '&status='.concat(param.status) : ''}${not empty param.feature ? '&feature='.concat(param.feature) : ''}">
-                                                <i class="ti-arrow-left"></i> Prev
-                                            </a>
-                                        </li>
-                                    </c:if>
-
-                                    <c:forEach begin="1" end="${totalPages}" var="i">
-                                        <li class="${currentPage == i ? 'active' : ''}">
-                                            <a href="postcontroller?page=${i}${not empty param.search ? '&search='.concat(param.search) : ''}${not empty param.sortBy ? '&sortBy='.concat(param.sortBy) : ''}${not empty param.category ? '&category='.concat(param.category) : ''}${not empty param.author ? '&author='.concat(param.author) : ''}${not empty param.status ? '&status='.concat(param.status) : ''}${not empty param.feature ? '&feature='.concat(param.feature) : ''}">${i}</a>
-                                        </li>
-                                    </c:forEach>
-
-                                    <c:if test="${currentPage < totalPages}">
-                                        <li class="next">
-                                            <a href="postcontroller?page=${currentPage + 1}${not empty param.search ? '&search='.concat(param.search) : ''}${not empty param.sortBy ? '&sortBy='.concat(param.sortBy) : ''}${not empty param.category ? '&category='.concat(param.category) : ''}${not empty param.author ? '&author='.concat(param.author) : ''}${not empty param.status ? '&status='.concat(param.status) : ''}${not empty param.feature ? '&feature='.concat(param.feature) : ''}">
-                                                Next <i class="ti-arrow-right"></i>
-                                            </a>
-                                        </li>
-                                    </c:if>
-                                </ul>
+                                        <c:if test="${currentPage < totalPages}">
+                                            <li class="next">
+                                                <a href="slidercontroller?${baseQuery}&page=${currentPage + 1}">
+                                                    Next <i class="ti-arrow-right"></i>
+                                                </a>
+                                            </li>
+                                        </c:if>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
         </main>
         <div class="ttr-overlay"></div>
 
         <!-- External JavaScripts -->
-         <script src="<%=request.getContextPath()%>/admin/assets/js/jquery.min.js"></script>
+        <script src="<%=request.getContextPath()%>/admin/assets/js/jquery.min.js"></script>
         <script src="<%=request.getContextPath()%>/admin/assets/vendors/bootstrap/js/popper.min.js"></script>
         <script src="<%=request.getContextPath()%>/admin/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
         <script src="<%=request.getContextPath()%>/admin/assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>

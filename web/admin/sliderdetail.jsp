@@ -1,10 +1,11 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.Slider"%>
+<%@page import="dal.SliderDAO"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <!-- META ============================================= -->
         <meta charset="utf-8">
@@ -27,7 +28,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath()%>/admin/assets/images/favicon.png" />
 
         <!-- PAGE TITLE HERE ============================================= -->
-        <title>Edit Post</title>
+        <title>Slider Detail</title>
 
         <!-- MOBILE SPECIFIC ============================================= -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -51,21 +52,85 @@
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/css/style.css">
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/css/dashboard.css">
         <link class="skin" rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/assets/css/color/color-1.css">
+
         <style>
-            .post-form{
-                margin-left: 20px;
-            }
-            .dbedit{
-                margin-left: 20px;
-                margin-top: 10px;
-            }
-            .row{
-                padding-left: 0px;
-            }
-            .widget-box{
-                margin-left: -14px;
+            .widget-box {
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                margin-top: 20px;
             }
 
+            .slider-image {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+                margin-bottom: 20px;
+            }
+
+            .slider-info {
+                margin-bottom: 20px;
+            }
+
+            .slider-info h4 {
+                color: #333;
+                margin-bottom: 10px;
+            }
+
+            .slider-info p {
+                color: #666;
+                margin-bottom: 5px;
+            }
+
+            .status {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                padding: 5px 10px;
+                border-radius: 4px;
+                font-weight: bold;
+            }
+
+            .status.active {
+                background-color: #28a745;
+                color: white;
+            }
+
+            .status.inactive {
+                background-color: #dc3545;
+                color: white;
+            }
+
+            .action-buttons {
+                margin-top: 20px;
+            }
+
+            .action-buttons a {
+                display: inline-block;
+                padding: 8px 16px;
+                margin-right: 10px;
+                border-radius: 4px;
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+            }
+
+            .btn-edit {
+                background-color: #007bff;
+            }
+
+            .btn-toggle {
+                background-color: #ffc107;
+            }
+
+            .btn-back {
+                background-color: #6c757d;
+            }
+
+            .btn-delete {
+                background-color: #dc3545;
+            }
         </style>
     </head>
     <body class="ttr-opened-sidebar ttr-pinned-sidebar">
@@ -92,15 +157,15 @@
                     <!-- header left menu start -->
                     <ul class="ttr-header-navigation">
                         <li>
-                            <a href="home" class="ttr-material-button ttr-submenu-toggle">HOME</a>
+                            <a href="../index.jsp" class="ttr-material-button ttr-submenu-toggle">HOME</a>
                         </li>
                         <li>
                             <a href="#" class="ttr-material-button ttr-submenu-toggle">QUICK MENU <i class="fa fa-angle-down"></i></a>
                             <div class="ttr-header-submenu">
                                 <ul>
-                                    <li><a href="home">Our Posts List</a></li>
-                                    <li><a href="event.jsp">New Event</a></li>
-                                    <li><a href="membership.jsp">Membership</a></li>
+                                    <li><a href="../index.jsp">Our Posts List</a></li>
+                                    <li><a href="../event.jsp">New Event</a></li>
+                                    <li><a href="../membership.jsp">Membership</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -250,11 +315,7 @@
             <div class="ttr-sidebar-wrapper content-scroll">
                 <!-- side menu logo start -->
                 <div class="ttr-sidebar-logo">
-                    <a href="home"><img alt="" src="assets/images/logo.png" width="122" height="27"></a>
-                    <!-- <div class="ttr-sidebar-pin-button" title="Pin/Unpin Menu">
-                            <i class="material-icons ttr-fixed-icon">gps_fixed</i>
-                            <i class="material-icons ttr-not-fixed-icon">gps_not_fixed</i>
-                    </div> -->
+                    <a href="#"><img alt="" src="assets/images/logo.png" width="122" height="27"></a>
                     <div class="ttr-sidebar-toggle-button">
                         <i class="ti-arrow-left"></i>
                     </div>
@@ -264,21 +325,21 @@
                 <nav class="ttr-sidebar-navi">
                     <ul>
                         <li>
-                            <a href="admin/index.jsp" class="ttr-material-button">
+                            <a href="index.jsp" class="ttr-material-button">
                                 <span class="ttr-icon"><i class="ti-home"></i></span>
                                 <span class="ttr-label">Dashborad</span>
                             </a>
                         </li>
                         <li>
-                            <a href="postcontroller" class="ttr-material-button">
-                                <span class="ttr-icon"><i class="ti-book"></i></span>
-                                <span class="ttr-label">Posts List</span>
+                            <a href="sliderslist.jsp" class="ttr-material-button">
+                                <span class="ttr-icon"><i class="ti-layout-grid2"></i></span>
+                                <span class="ttr-label">Sliders List</span>
                             </a>
                         </li>
                         <li>
-                            <a href="slidercontroller" class="ttr-material-button">
+                            <a href="postslist.jsp" class="ttr-material-button">
                                 <span class="ttr-icon"><i class="ti-book"></i></span>
-                                <span class="ttr-label">Sliders List</span>
+                                <span class="ttr-label">Posts List</span>
                             </a>
                         </li>
                         <li>
@@ -354,101 +415,77 @@
                 <!-- sidebar menu end -->
             </div>
         </div>
+
+        <!-- Main container -->
         <main class="ttr-wrapper">
-            <div class="row">
-                <div class="col-lg-12 m-b30">
-                    <div class="widget-box">
-                        <div class="db-breadcrumb dbedit">
-                            <h4 class="breadcrumb-title" style="font-size: 24px;">Edit Post</h4>
-                            <ul class="db-breadcrumb-list">
-                                <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
-                                <li>Edit Post</li>
-                            </ul>
-                        </div>
-
-                        <c:if test="${not empty error}">
-                            <div class="alert alert-danger" role="alert">
-                                ${error}
-                            </div>
-                        </c:if>
-
-                        <form method="POST" action="postcontroller" class="post-form">
-                            <input type="hidden" name="action" value="edit">
-                            <input type="hidden" name="id" value="${post.postID}">
-
-                            <div class="form-group">
-                                <label for="title">Title</label>
-                                <input type="text" class="form-control" id="title" name="title" value="${post.title}" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="briefInfo">Brief Info</label>
-                                <textarea class="form-control" id="briefInfo" name="briefInfo" rows="3" required>${post.briefInfo}</textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea class="form-control" id="description" name="description" rows="5" required>${post.description}</textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="thumbnail">Thumbnail URL</label>
-                                <input type="text" class="form-control" id="thumbnail" name="thumbnail" value="${post.thumbnail}" required>
-                                <small class="form-text text-muted">Enter the URL of the thumbnail image</small>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="category">Category</label>
-                                <select class="form-control" id="category" name="category" required>
-                                    <c:forEach var="category" items="${categories}">
-                                        <option value="${category.postCategoryID}" 
-                                                ${post.postCategory.postCategoryID == category.postCategoryID ? 'selected' : ''}>
-                                            ${category.postCategoryName}
-                                        </option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="status">Status</label>
-                                <select class="form-control" id="status" name="status" required>
-                                    <option value="Active" ${post.status eq 'Active' ? 'selected' : ''}>Active</option>
-                                    <option value="Inactive" ${post.status eq 'Inactive' ? 'selected' : ''}>Inactive</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="feature" name="feature" ${post.feature ? 'checked' : ''}>
-                                    <label class="custom-control-label" for="feature">Feature this post</label>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 m-b30">
+                        <div class="widget-box">
+                            <div class="wc-title">
+                                <div class="db-breadcrumb">
+                                    <h4 class="breadcrumb-title" style="font-size: 24px;">Slider Detail</h4>
+                                    <ul class="db-breadcrumb-list">
+                                        <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                                        <li>Slider Detail</li>
+                                    </ul>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Update Post</button>
-                                <a href="postcontroller" class="btn btn-secondary">Cancel</a>
+                            <div class="widget-inner">
+                                <div class="slider-detail">
+                                    <img src="${slider.image}" alt="Slider Image" class="slider-image">
+
+                                    <div class="slider-info">
+                                        <h4>Title</h4>
+                                        <p>${slider.title}</p>
+
+                                        <h4>Backlink</h4>
+                                        <p>${slider.backlink}</p>
+
+                                        <h4>Status</h4>
+                                        <p>
+                                            <span class="status ${slider.status eq 'Active' ? 'active' : 'inactive'}">
+                                                ${slider.status}
+                                            </span>
+                                        </p>
+
+                                        <h4>Notes</h4>
+                                        <p>${slider.notes}</p>
+                                    </div>
+
+                                    <div class="action-buttons">
+                                        <a href="slidercontroller?action=showEditForm&id=${slider.sliderID}" class="btn-edit">Edit</a>
+                                        <a href="slidercontroller?action=toggleStatus&id=${slider.sliderID}" class="btn-toggle">
+                                            ${slider.status eq 'Active' ? 'Set Inactive' : 'Set Active'}
+                                        </a>
+                                        <a href="slidercontroller" class="btn-back">Back to List</a>
+                                        
+                                    </div>
+                                </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
-    <script src="<%=request.getContextPath()%>/admin/assets/js/jquery.min.js"></script>
-    <script src="<%=request.getContextPath()%>/admin/assets/vendors/bootstrap/js/popper.min.js"></script>
-    <script src="<%=request.getContextPath()%>/admin/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<%=request.getContextPath()%>/admin/assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
-    <script src="<%=request.getContextPath()%>/admin/assets/vendors/magnific-popup/magnific-popup.js"></script>
-    <script src="<%=request.getContextPath()%>/admin/assets/vendors/counter/waypoints-min.js"></script>
-    <script src="<%=request.getContextPath()%>/admin/assets/vendors/counter/counterup.min.js"></script>
-    <script src="<%=request.getContextPath()%>/admin/assets/vendors/imagesloaded/imagesloaded.js"></script>
-    <script src="<%=request.getContextPath()%>/admin/assets/vendors/masonry/masonry.js"></script>
-    <script src="<%=request.getContextPath()%>/admin/assets/vendors/masonry/filter.js"></script>
-    <script src="<%=request.getContextPath()%>/admin/assets/vendors/owl-carousel/owl.carousel.js"></script>
-    <script src='<%=request.getContextPath()%>/admin/assets/vendors/scroll/scrollbar.min.js'></script>
-    <script src="<%=request.getContextPath()%>/admin/assets/js/functions.js"></script>
-    <script src="<%=request.getContextPath()%>/admin/assets/vendors/chart/chart.min.js"></script>
-    <script src="<%=request.getContextPath()%>/admin/assets/js/admin.js"></script>
+        </main>
+        <div class="ttr-overlay"></div>
 
-</body>
+        <!-- External JavaScripts -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/vendors/bootstrap/js/popper.min.js"></script>
+        <script src="assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
+        <script src="assets/vendors/magnific-popup/magnific-popup.js"></script>
+        <script src="assets/vendors/counter/waypoints-min.js"></script>
+        <script src="assets/vendors/counter/counterup.min.js"></script>
+        <script src="assets/vendors/imagesloaded/imagesloaded.js"></script>
+        <script src="assets/vendors/masonry/masonry.js"></script>
+        <script src="assets/vendors/masonry/filter.js"></script>
+        <script src="assets/vendors/owl-carousel/owl.carousel.js"></script>
+        <script src='assets/vendors/scroll/scrollbar.min.js'></script>
+        <script src="assets/js/functions.js"></script>
+        <script src="assets/vendors/chart/chart.min.js"></script>
+        <script src="assets/js/admin.js"></script>
+    </body>
 </html> 

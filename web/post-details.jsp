@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
     <head>
 
         <!-- META ============================================= -->
@@ -49,6 +48,130 @@
         <!-- STYLESHEETS ============================================= -->
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
         <link class="skin" rel="stylesheet" type="text/css" href="assets/css/color/color-1.css">
+
+        <style>
+            .post-detail {
+                padding: 30px;
+                background: #fff;
+                border-radius: 8px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+                margin: 30px 0;
+            }
+
+            .post-header {
+                margin-bottom: 30px;
+            }
+
+            .post-title {
+                font-size: 2.5rem;
+                color: #333;
+                margin-bottom: 20px;
+                font-weight: 600;
+            }
+
+            .post-meta {
+                color: #666;
+                font-size: 0.95rem;
+                margin-bottom: 20px;
+            }
+
+            .post-meta i {
+                margin-right: 5px;
+                color: #f8c61b;
+            }
+
+            .post-meta p {
+                margin-bottom: 10px;
+            }
+
+            .status {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                padding: 5px 10px;
+                border-radius: 20px;
+                background: #f8f9fa;
+            }
+
+            .status .dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                display: inline-block;
+            }
+
+            .status .dot.active {
+                background-color: #28a745;
+            }
+
+            .status .dot.inactive {
+                background-color: #dc3545;
+            }
+
+            .feature-badge {
+                color: #f8c61b;
+                font-weight: 600;
+                margin-left: 10px;
+            }
+
+            .post-thumbnail {
+                margin: 30px 0;
+                text-align: center;
+            }
+
+            .post-thumbnail img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+                box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            }
+
+            .post-content {
+                margin: 30px 0;
+            }
+
+            .post-content h3 {
+                color: #333;
+                font-size: 1.5rem;
+                margin: 25px 0 15px;
+                font-weight: 600;
+            }
+
+            .post-content p {
+                color: #666;
+                line-height: 1.8;
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                padding: 10px 25px;
+                border-radius: 5px;
+                font-weight: 500;
+                transition: all 0.3s ease;
+            }
+
+            .btn-secondary {
+                background: #6c757d;
+                color: #fff;
+                border: none;
+            }
+
+            .btn-primary {
+                background: #f8c61b;
+                color: #333;
+                border: none;
+                margin-left: 10px;
+            }
+
+            .btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+            .edit {
+                margin-left: 10px;
+            }
+        </style>
 
     </head>
     <body id="bg">
@@ -103,12 +226,6 @@
                                         <li><a href="javascript:;" class="btn-link"><i class="fa fa-linkedin"></i></a></li>
                                         <!-- Search Button ==== -->
                                         <li class="search-btn"><button id="quik-search-btn" type="button" class="btn-link"><i class="fa fa-search"></i></button></li>
-
-                                        <!--My Course / My Registration-->
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <li><a href="mycoursecontroller" class="btn-link customer-course"><p>My Courses</p></a></li>
-                                        &nbsp;&nbsp;&nbsp;
-                                        <li><a href="registrationcontroller" class="btn-link customer-registration"><p>My Registrations</p></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -232,10 +349,10 @@
             <!-- Content -->
             <div class="page-content bg-white">
                 <!-- inner page banner -->
-                <div class="page-banner ovbl-dark" style="background-image:url(assets/images/banner/banner3.jpg);">
+                <div class="page-banner ovbl-dark" style="background-image:url(assets/images/banner/banner2.jpg);">
                     <div class="container">
                         <div class="page-banner-entry">
-                            <h1 class="text-white">My Courses</h1>
+                            <h1 class="text-white">post Details</h1>
                         </div>
                     </div>
                 </div>
@@ -244,55 +361,58 @@
                     <div class="container">
                         <ul class="list-inline">
                             <li><a href="#">Home</a></li>
-                            <li>My Courses</li>
+                            <li>post Details</li>
                         </ul>
                     </div>
                 </div>
-                <!-- Breadcrumb row END -->
-                <!-- inner page banner END -->
-                <!-- Page Content Box ==== -->
-                <div class="content-block">
-                    <!-- Blog Grid ==== -->
-                    <div class="section-area section-sp1">
-                        <div class="container">
-                            <div class="ttr-blog-grid-3 row" id="masonry">
-                                <c:forEach items="${requestScope.listPaidCourse}" var="a">
-                                    <div class="post action-card col-lg-4 col-md-6 col-sm-12 col-xs-12 m-b40">
-                                        <div class="recent-news">
-                                            <div class="action-box" style="height:180px; overflow:hidden;">
-                                                <img src="${a.course.thumbnail}" alt="${a.course.courseName}" style="width:100%; height:100%; object-fit:cover;">
-                                            </div>
+                <!-- Post Details Content -->
+                <div class="page-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="post-detail">
+                                    <div class="post-header">
+                                        <h1 class="post-title">${post.title}</h1>
+                                        <div class="post-meta">
+                                            <p>
+                                                <i class="fa fa-user"></i> Author: ${post.owner.fullName} |
+                                                <i class="fa fa-folder"></i> Category: ${post.postCategory.postCategoryName} |
+                                                <i class="fa fa-calendar"></i> Created: <fmt:formatDate value="${post.createDate}" pattern="dd/MM/yyyy"/> |
+                                                <i class="fa fa-calendar"></i> Updated: <fmt:formatDate value="${post.updateDate}" pattern="dd/MM/yyyy"/>
+                                            </p>
+                                            <p>
+                                                <span class="status">
+                                                    <span class="dot ${post.status eq 'Active' ? 'active' : 'inactive'}"></span>
+                                                    ${post.status}
+                                                </span>
 
-                                            <div class="info-bx">
-                                                <ul class="media-post">
-                                                    <li><a href="#"><i class="fa fa-user"></i>${a.course.owner.fullName}</a></li><br>
-                                                    <li><a href="#"><i class="fa fa-tags"></i>${a.course.courseCategory.courseCategoryName}</a></li>
-                                                </ul>
-                                                <h5 class="post-title" style="height:3em; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;">
-                                                    <a href="#">${a.course.courseName}</a>
-                                                </h5>
-                                                <div class="post-extra" style="display: flex; justify-content: center">
-                                                    
-
-                                                    <c:if test="${a.totalCompletedLesson == 0}">
-                                                        <a href="#">START COURSE</a>
-                                                    </c:if>
-                                                    <c:if test="${a.totalCompletedLesson != 0}">
-                                                        Complete&nbsp;:&nbsp;
-                                                        <fmt:formatNumber value="${(a.totalCompletedLesson * 100) div a.totalLesson}" type="number" maxFractionDigits="0" />%
-                                                    </c:if>
-                                                </div>
-                                            </div>
+                                                <c:if test="${post.feature}">
+                                                    <span class="feature-badge">|| Featured</span>
+                                                </c:if>
+                                            </p>
                                         </div>
                                     </div>
-                                </c:forEach>
 
+                                    <c:if test="${not empty post.thumbnail}">
+                                        <div class="post-thumbnail">
+                                            <img src="${post.thumbnail}" alt="${post.title}" class="img-fluid">
+                                        </div>
+                                    </c:if>
+
+                                    <div class="post-content">
+                                        <h3>Brief Info</h3>
+                                        <p>${post.briefInfo}</p>
+
+                                        <h3>Description</h3>
+                                        <p>${post.description}</p>
+                                    </div>
+
+                                
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Blog Grid END ==== -->
                 </div>
-                <!-- Page Content Box END ==== -->
             </div>
             <!-- Content END-->
             <!-- Footer ==== -->
@@ -320,23 +440,7 @@
                     </div>
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-4 col-md-12 col-sm-12 footer-col-4">
-                                <div class="widget">
-                                    <h5 class="footer-title">Sign Up For A Newsletter</h5>
-                                    <p class="text-capitalize m-b20">Weekly Breaking news analysis and cutting edge advices on job searching.</p>
-                                    <div class="subscribe-form m-b20">
-                                        <form class="subscription-form" action="http://educhamp.themetrades.com/demo/assets/script/mailchamp.php" method="post">
-                                            <div class="ajax-message"></div>
-                                            <div class="input-group">
-                                                <input name="email" required="required"  class="form-control" placeholder="Your Email Address" type="email">
-                                                <span class="input-group-btn">
-                                                    <button name="submit" value="Submit" type="submit" class="btn"><i class="fa fa-arrow-right"></i></button>
-                                                </span> 
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="col-12 col-lg-5 col-md-7 col-sm-12">
                                 <div class="row">
                                     <div class="col-4 col-lg-4 col-md-4 col-sm-4">
@@ -374,21 +478,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-3 col-md-5 col-sm-12 footer-col-4">
-                                <div class="widget widget_gallery gallery-grid-4">
-                                    <h5 class="footer-title">Our Gallery</h5>
-                                    <ul class="magnific-image">
-                                        <li><a href="assets/images/gallery/pic1.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic1.jpg" alt=""></a></li>
-                                        <li><a href="assets/images/gallery/pic2.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic2.jpg" alt=""></a></li>
-                                        <li><a href="assets/images/gallery/pic3.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic3.jpg" alt=""></a></li>
-                                        <li><a href="assets/images/gallery/pic4.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic4.jpg" alt=""></a></li>
-                                        <li><a href="assets/images/gallery/pic5.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic5.jpg" alt=""></a></li>
-                                        <li><a href="assets/images/gallery/pic6.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic6.jpg" alt=""></a></li>
-                                        <li><a href="assets/images/gallery/pic7.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic7.jpg" alt=""></a></li>
-                                        <li><a href="assets/images/gallery/pic8.jpg" class="magnific-anchor"><img src="assets/images/gallery/pic8.jpg" alt=""></a></li>
-                                    </ul>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -401,6 +491,7 @@
                 </div>
             </footer>
             <!-- Footer END ==== -->
+            <!-- scroll top button -->
             <button class="back-to-top fa fa-chevron-up" ></button>
         </div>
         <!-- External JavaScripts -->

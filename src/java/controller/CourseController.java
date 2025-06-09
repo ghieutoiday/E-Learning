@@ -86,7 +86,7 @@ public class CourseController extends HttpServlet {
         session.setAttribute("courseList", courseList);
 
         List<CourseCategory> courseCategoryList = courseCategoryDao.getAllCategory();
-        session.setAttribute("courseCategoryList", courseCategoryList);
+        session.setAttribute("courseCategoryList", courseCategoryList); 
 
         request.getRequestDispatcher("subject-list.jsp").forward(request, response);
     }
