@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -270,7 +271,16 @@
                                                     <a href="#">${a.course.courseName}</a>
                                                 </h5>
                                                 <div class="post-extra" style="display: flex; justify-content: center">
-                                                    Complete&nbsp;:&nbsp;<c:out value="${(a.totalCompletedLesson * 100) div a.totalLesson}"/>%
+
+                                                    <c:if test="${a.totalCompletedLesson == 0}">
+                                                        <a href="#">START COURSE</a>
+                                                    </c:if>
+                                                    <c:if test="${a.totalCompletedLesson != 0}">
+                                                        Complete&nbsp;:&nbsp;
+                                                        <fmt:formatNumber value="${(a.totalCompletedLesson * 100) div a.totalLesson}" type="number" maxFractionDigits="0" />%
+                                                    </c:if>
+
+
                                                 </div>
                                             </div>
                                         </div>
